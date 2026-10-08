@@ -1,0 +1,60 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Planning a ₹2.5 Crore Retirement Corpus in 20 Years',
+  description: 'An investor starting at age 35 planning retirement by age 55 with ₹35,000 monthly SIP at 12% return.',
+  steps: [
+    { label: 'Current Savings', value: '₹5,00,000' },
+    { label: 'Target Retirement Corpus', value: '₹2,50,00,000' },
+    { label: 'Monthly SIP', value: '₹35,000' },
+    { label: 'Expected Return', value: '12% p.a.' },
+    { label: 'Time Horizon', value: '20 Years' },
+    { label: 'Projected Corpus Achieved', value: '₹3,96,00,000 (Exceeds ₹2.5 Cr goal!)' }
+  ],
+  result: 'Retirement goal of ₹2.5 Crore reached in just 16.5 years!'
+};
+
+const faqItems = [
+  {
+    question: 'How much corpus is needed to retire in India?',
+    answer: 'A common rule of thumb is 25x to 30x of your anticipated annual living expenses at the time of retirement, adjusted for future inflation. For example, if your family living expenses are estimated to be ₹12 Lakh/year, a corpus of ₹3 Crore to ₹3.5 Crore provides safety.'
+  },
+  {
+    question: 'What is the 4% Rule?',
+    answer: 'The 4% Rule states that if you withdraw 4% of your total retirement portfolio in your first year of retirement and adjust subsequent withdrawals for inflation, your corpus has an extremely high probability of lasting 30 years.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'SWP Calculator', desc: 'Simulate monthly withdrawals from your retirement nest egg.', path: `${base}/calculators/swp-calculator/` },
+  { title: 'Inflation Calculator', desc: 'Assess future cost of living inflation.', path: `${base}/calculators/inflation-calculator/` },
+  { title: 'Time to Target Calculator', desc: 'Find how many years until you can retire.', path: `${base}/calculators/time-to-money-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="Retirement Calculator — Plan Your Financial Independence (FIRE)"
+  description="Calculate your required retirement corpus, years to financial independence, monthly savings target, and sustainable post-retirement pension."
+  badge="Financial Independence"
+  headline="Retirement Corpus Planner"
+  subheadline="Design an inflation-proof retirement nest egg. Determine how much you need to save and when you can achieve financial freedom."
+  initialMode="time"
+  initialTarget={25000000}
+  initialCurrent={500000}
+  initialReturn={12}
+  initialMonthly={35000}
+  formulaTitle="Retirement Nest Egg Calculation"
+  formulaCode="Corpus = Annual Expenses × 25 to 30 (Inflation Indexed)"
+  formulaExplanation="<p>Retirement planning requires two phases: the accumulation phase (where SIP and compounding build the corpus) and the distribution phase (where systematic withdrawals fund your lifestyle while the balance compounds in conservative assets).</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'Retirement Calculator', url: '/calculators/retirement-calculator/' }
+  ]}
+/>

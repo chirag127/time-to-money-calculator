@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="SIP vs Lump Sum Investing — Mathematical Comparison & Strategy Guide"
+  description="Explore the mathematical difference between Systematic Investment Plans (SIP) and Lump Sum investing. Rupee Cost Averaging vs Time in Market."
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Learn', url: '/learn/' },
+    { name: 'SIP vs Lump Sum', url: '/guides/sip-vs-lumpsum/' }
+  ]}
+>
+  <div class="guide-article-page">
+    <div class="container article-container">
+      <nav class="breadcrumb-nav">
+        <a href={`${base}/`}>Home</a> / <a href={`${base}/learn/`}>Learn</a> / <span>SIP vs Lump Sum</span>
+      </nav>
+
+      <span class="badge badge-indigo">Strategy Comparison</span>
+      <h1>SIP vs Lump Sum Investing: The Definitive Mathematical Guide</h1>
+      <p class="article-lead">
+        Should you invest all your money at once or stagger it through a monthly Systematic Investment Plan (SIP)? We break down the mathematical trade-offs, psychological realities, and empirical findings.
+      </p>
+
+      <div class="article-body">
+        <h2>1. The Mathematics: Lump Sum Wins on Average</h2>
+        <p>
+          Historically, major equity markets (like the Nifty 50 or S&P 500) trend upward roughly 70% to 75% of the time over any given 1-year period.
+        </p>
+        <p>
+          Because markets trend upward more often than they trend downward, investing a lump sum earlier gives every rupee the maximum possible time to compound. In purely academic backtests without emotion, <strong>Lump Sum beats SIP approximately 66% to 70% of the time</strong>.
+        </p>
+
+        <h2>2. The Psychology: Why SIP Wins in Real Life</h2>
+        <p>
+          While lump sum wins on cold paper, real human investors face regret risk:
+        </p>
+        <ul>
+          <li><strong>Regret Minimization:</strong> If you invest ₹10 Lakh in a lump sum today and the market drops 15% next week, panic and despair frequently cause investors to sell at the bottom.</li>
+          <li><strong>Rupee Cost Averaging:</strong> With an SIP, market corrections are your best friend. A falling market allows your fixed monthly installment to purchase more units of the fund, lowering your average cost.</li>
+          <li><strong>Income Alignment:</strong> Most individuals earn a monthly salary. An SIP naturally matches your cash inflow with disciplined investment outflow.</li>
+        </ul>
+
+        <h2>3. The Hybrid Strategy: STP (Systematic Transfer Plan)</h2>
+        <p>
+          If you receive a large windfall or bonus and want to avoid all-or-nothing market timing, you can park the capital in a liquid fund and set up a 6-month or 12-month Systematic Transfer Plan (STP) into your chosen equity fund.
+        </p>
+
+        <div class="cta-box">
+          <h3>Compare Both Scenarios</h3>
+          <p>Model both strategies using our Scenario Comparison tool.</p>
+          <a href={`${base}/calculators/time-to-money-calculator/?mode=scenarios`} class="btn btn-primary">
+            Open Scenario Comparison →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .guide-article-page { padding: 3rem 0 5rem; }
+  .article-container { max-width: 780px; }
+  .breadcrumb-nav { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .breadcrumb-nav a:hover { color: var(--accent-primary); }
+  h1 { margin: 0.75rem 0 1.25rem; }
+  .article-lead { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 2.5rem; }
+  .article-body h2 { font-size: 1.45rem; margin: 2rem 0 1rem; }
+  .article-body p { font-size: 1rem; line-height: 1.7; margin-bottom: 1.25rem; }
+  .article-body ul { margin: 0 0 1.5rem 1.5rem; font-size: 0.98rem; color: var(--text-secondary); }
+  .article-body li { margin-bottom: 0.6rem; }
+  .cta-box { margin-top: 3rem; background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 2rem; text-align: center; }
+  .cta-box h3 { margin-bottom: 0.5rem; }
+  .cta-box p { margin-bottom: 1.25rem; }
+</style>

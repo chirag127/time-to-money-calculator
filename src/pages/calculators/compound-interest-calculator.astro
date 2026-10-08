@@ -1,0 +1,59 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: '₹2,00,000 Compounded Annually at 11% for 12 Years',
+  description: 'Examining exponential growth on a single lump sum deposit.',
+  steps: [
+    { label: 'Principal (P)', value: '₹2,00,000' },
+    { label: 'Annual Rate (r)', value: '11% p.a.' },
+    { label: 'Time (t)', value: '12 Years' },
+    { label: 'Compounding Frequency', value: 'Monthly' },
+    { label: 'Interest Earned', value: '₹5,44,700' }
+  ],
+  result: 'Total Future Balance: ₹7,44,700 (More than 3.7x initial principal)'
+};
+
+const faqItems = [
+  {
+    question: 'How is compound interest different from simple interest?',
+    answer: 'In simple interest, interest is paid only on original principal: I = P × r × t. In compound interest, earned interest is continuously added back into the principal so that interest earns interest: A = P(1 + r/n)^(nt).'
+  },
+  {
+    question: 'What is the Rule of 72?',
+    answer: 'The Rule of 72 is a quick mental math shortcut. Divide 72 by the annual compound interest rate to find out approximately how many years it takes to double your money. E.g., at 9% return, money doubles in 72 / 9 = 8 years.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'Time to Target Calculator', desc: 'Find years needed to reach any amount.', path: `${base}/calculators/time-to-money-calculator/` },
+  { title: 'Future Value Calculator', desc: 'Calculate future worth with monthly additions.', path: `${base}/calculators/future-value-calculator/` },
+  { title: 'CAGR Calculator', desc: 'Find the annualized compound growth rate.', path: `${base}/calculators/cagr-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="Compound Interest Calculator — Exponential Wealth Growth"
+  description="Calculate compound interest with daily, monthly, quarterly, and annual compounding. Understand how interest on interest drives exponential wealth."
+  badge="Foundational Mathematics"
+  headline="Compound Interest Calculator"
+  subheadline="Experience the 8th wonder of the world. Visualize how reinvested earnings multiply wealth over time."
+  initialMode="future"
+  initialCurrent={200000}
+  initialReturn={11}
+  initialMonthly={0}
+  initialYears={12}
+  formulaTitle="Compound Interest Formula"
+  formulaCode="A = P × (1 + r / n)^(n × t)"
+  formulaExplanation="<p>Where A = Total accrued amount, P = Principal investment amount, r = Annual nominal interest rate, n = Number of compounding periods per year, and t = Number of years.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'Compound Interest Calculator', url: '/calculators/compound-interest-calculator/' }
+  ]}
+/>

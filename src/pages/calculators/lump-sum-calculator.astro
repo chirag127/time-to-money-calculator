@@ -1,0 +1,59 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Lump Sum Investment of ₹10,00,000 for 15 Years at 12%',
+  description: 'A one-time inheritance or windfall invested in a diversified portfolio.',
+  steps: [
+    { label: 'Initial Lump Sum', value: '₹10,00,000' },
+    { label: 'Annualized Expected Return', value: '12% p.a.' },
+    { label: 'Time Horizon', value: '15 Years' },
+    { label: 'Total Contributions', value: '₹10,00,000' },
+    { label: 'Total Compound Gain', value: '₹44,73,500' }
+  ],
+  result: 'Future Portfolio Value: ₹54,73,500 (Grows nearly 5.5x!)'
+};
+
+const faqItems = [
+  {
+    question: 'What is a Lump Sum investment?',
+    answer: 'A lump sum investment is a single, one-time deposit of capital into an investment instrument without subsequent regular monthly contributions.'
+  },
+  {
+    question: 'When should you invest a lump sum instead of SIP?',
+    answer: 'When you have a large pool of capital (e.g. bonus, property sale, inheritance) and a long investment horizon (7+ years), putting the money to work early allows maximum time for compounding.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'SIP Calculator', desc: 'Simulate regular monthly SIP investments.', path: `${base}/calculators/sip-calculator/` },
+  { title: 'Compound Interest Calculator', desc: 'Detailed compound interest visualization.', path: `${base}/calculators/compound-interest-calculator/` },
+  { title: '1 Crore Calculator', desc: 'Calculate roadmaps to reach ₹1 Crore.', path: `${base}/calculators/1-crore-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="Lump Sum Calculator — One-Time Investment Growth Calculator"
+  description="Calculate how much a one-time lump sum investment will grow over time with compound interest and inflation adjustments."
+  badge="Lump Sum Compounding"
+  headline="Lump Sum Calculator"
+  subheadline="Forecast how a single one-time capital investment grows into significant wealth over 5, 10, 15, or 25 years."
+  initialMode="future"
+  initialCurrent={1000000}
+  initialReturn={12}
+  initialMonthly={0}
+  initialYears={15}
+  formulaTitle="Lump Sum Compounding Formula"
+  formulaCode="A = P × (1 + r)^t"
+  formulaExplanation="<p>Where A is the final maturity amount, P is the initial principal lump sum, r is the annual rate of return, and t is the time horizon in years.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'Lump Sum Calculator', url: '/calculators/lump-sum-calculator/' }
+  ]}
+/>

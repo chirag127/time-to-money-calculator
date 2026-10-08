@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="Terms of Service & Disclaimer — Time to Money Calculator"
+  description="Terms of service, usage policies, and non-financial advice disclaimers for the Time to Money Calculator."
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Terms of Service', url: '/terms/' }
+  ]}
+>
+  <div class="legal-page">
+    <div class="container legal-container">
+      <span class="badge badge-amber">Legal Notice</span>
+      <h1>Terms of Service & Mathematical Disclaimer</h1>
+      <p class="last-updated">Last Updated: October 2026</p>
+
+      <div class="legal-content">
+        <h2>1. Not Financial, Tax, or Investment Advice</h2>
+        <p>
+          The <strong>Time to Money Calculator</strong> is an educational and mathematical simulation tool provided free of charge. <strong>The projections and estimates produced by this software do NOT constitute financial, investment, legal, tax, or retirement advice.</strong>
+        </p>
+        <p>
+          Actual market returns, inflation rates, interest rate fluctuations, taxation rules, fund expense ratios, and economic environments are volatile and unpredictable. Past returns do not guarantee future performance. Always consult a certified financial planner, registered investment advisor (such as a SEBI-registered advisor in India), or tax professional before making significant financial commitments.
+        </p>
+
+        <h2>2. Mathematical Assumptions and Model Limitations</h2>
+        <p>
+          Calculations are based on idealized mathematical compounding formulas (discrete periodic compounding, annuity due/ordinary annuities, and constant rate assumptions). In real financial markets, returns are non-linear, stochastic, and subject to drawdowns, sequence of returns risk, and black swan events.
+        </p>
+
+        <h2>3. Limitation of Liability</h2>
+        <p>
+          Under no circumstances shall the author (Chirag Singhal) or contributors be held liable for any financial losses, investment damages, or missed opportunities arising from the use or reliance upon this software.
+        </p>
+
+        <h2>4. Open Source & License</h2>
+        <p>
+          The codebase is open source under the MIT License on <a href="https://github.com/chirag127/time-to-money-calculator" target="_blank" rel="noopener noreferrer">GitHub</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .legal-page { padding: 3.5rem 0 5rem; }
+  .legal-container { max-width: 800px; }
+  h1 { margin: 0.5rem 0 0.25rem; }
+  .last-updated { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; }
+  .legal-content h2 { font-size: 1.3rem; margin: 2rem 0 0.75rem; }
+  .legal-content p { font-size: 1rem; line-height: 1.7; margin-bottom: 1.25rem; color: var(--text-secondary); }
+  .legal-content a { color: var(--accent-primary); text-decoration: underline; }
+</style>

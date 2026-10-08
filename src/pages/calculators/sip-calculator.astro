@@ -1,0 +1,60 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: '₹15,000 Monthly SIP for 15 Years at 13% Return with 10% Step-Up',
+  description: 'Simulating a disciplined mutual fund Systematic Investment Plan that increases by 10% each year with salary increments.',
+  steps: [
+    { label: 'Initial Monthly Investment', value: '₹15,000 / month' },
+    { label: 'Annual Step-Up Rate', value: '10% annual increase' },
+    { label: 'Duration', value: '15 Years' },
+    { label: 'Expected Return', value: '13% p.a.' },
+    { label: 'Total Invested Capital', value: '₹57,19,000' },
+    { label: 'Estimated Growth', value: '₹84,45,000' }
+  ],
+  result: 'Total Corpus: ₹1,41,64,000 (Over ₹1.4 Crore amassed!)'
+};
+
+const faqItems = [
+  {
+    question: 'What is a Step-Up SIP?',
+    answer: 'A Step-Up (or Top-Up) SIP automatically increases your monthly investment amount by a chosen percentage or fixed sum every year. It dramatically boosts your final wealth corpus because your contributions increase as your career and savings grow.'
+  },
+  {
+    question: 'Is SIP better than Lump Sum investing?',
+    answer: 'SIP averages out market volatility (Rupee Cost Averaging) and builds financial discipline from monthly income. Lump sum investing can mathematically generate higher returns in continuous bull markets, but SIP prevents the psychological risk of bad market timing.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'Lump Sum Calculator', desc: 'Simulate one-time lump sum investing.', path: `${base}/calculators/lump-sum-calculator/` },
+  { title: '1 Crore Calculator', desc: 'Target 1 Crore with monthly SIP.', path: `${base}/calculators/1-crore-calculator/` },
+  { title: 'SWP Calculator', desc: 'Plan systematic monthly retirement withdrawals.', path: `${base}/calculators/swp-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="SIP Calculator — Mutual Fund Systematic Investment Plan Calculator"
+  description="Calculate your mutual fund SIP wealth growth with annual step-up SIP hikes, compound interest, and inflation-adjusted corpus estimates."
+  badge="Wealth Building"
+  headline="SIP Return Calculator"
+  subheadline="Model systematic wealth accumulation. See how small, disciplined monthly investments compound into massive portfolios over 5 to 25 years."
+  initialMode="future"
+  initialCurrent={0}
+  initialReturn={13}
+  initialMonthly={15000}
+  initialYears={15}
+  formulaTitle="SIP Annuity Compound Formula"
+  formulaCode="M = P × [ ((1 + i)^n - 1) / i ] × (1 + i)"
+  formulaExplanation="<p>Where M = Maturity amount, P = Periodic monthly investment, i = Monthly interest rate (r / 12), and n = Total number of monthly installments. The (1 + i) factor accounts for payments made at the start of each month.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'SIP Calculator', url: '/calculators/sip-calculator/' }
+  ]}
+/>

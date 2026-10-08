@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const educationalTopics = [
+  {
+    title: 'Compound Interest Mechanics',
+    desc: 'Why Albert Einstein called it the eighth wonder of the world. Understanding exponential curves and interest-on-interest.',
+    formula: 'A = P(1 + r/n)^(nt)',
+    link: `${base}/calculators/compound-interest-calculator/`,
+    cta: 'Test Compound Interest'
+  },
+  {
+    title: 'CAGR vs XIRR: When to Use Which?',
+    desc: 'Point-to-point geometric growth vs cash-flow-weighted returns for SIPs and irregular deposits.',
+    formula: 'CAGR = (EV/BV)^(1/t) - 1',
+    link: `${base}/calculators/cagr-calculator/`,
+    cta: 'Explore CAGR Calculator'
+  },
+  {
+    title: 'The Fisher Equation & Real Returns',
+    desc: 'How inflation silently degrades your future wealth and how to calculate inflation-proof real returns.',
+    formula: '1 + r_real = (1 + r_nom) / (1 + i)',
+    link: `${base}/calculators/inflation-calculator/`,
+    cta: 'Analyze Inflation Impact'
+  },
+  {
+    title: 'The Power of Step-Up SIP',
+    desc: 'How bumping your monthly investment by 10% each year reduces time to target by up to 35%.',
+    formula: 'SIP(y) = SIP_0 × (1 + g)^y',
+    link: `${base}/calculators/sip-calculator/`,
+    cta: 'Simulate Step-Up SIP'
+  },
+  {
+    title: 'Systematic Withdrawal Sustainability (SWP)',
+    desc: 'Understanding the mechanics of capital preservation, safe withdrawal rates (SWR), and sequence of returns risk.',
+    formula: 'Balance(m) = Bal(m-1)(1 + r) - PMT',
+    link: `${base}/calculators/swp-calculator/`,
+    cta: 'Run SWP Longevity Model'
+  },
+  {
+    title: 'The Rule of 72 & Mental Math',
+    desc: 'A quick mathematical heuristic to calculate doubling time at any interest rate.',
+    formula: 'Years to Double ≈ 72 / r',
+    link: `${base}/guides/rule-of-72/`,
+    cta: 'Read Rule of 72 Guide'
+  }
+];
+---
+
+<BaseLayout
+  title="Financial Mathematics & Wealth Planning Hub — Learn Time to Money"
+  description="Master the core mathematics of wealth creation: Compound Interest, CAGR, XIRR, Step-Up SIP, Real vs Nominal Returns, and Systematic Withdrawal Plans."
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Learn', url: '/learn/' }
+  ]}
+>
+  <div class="learn-page">
+    <div class="container">
+      <div class="learn-header">
+        <span class="badge badge-indigo">Educational Academy</span>
+        <h1>Financial Mathematics & Wealth Engineering</h1>
+        <p class="learn-subheadline">
+          Transparent, rigorous explanations of the mathematics driving compound growth, inflation, investment returns, and financial independence.
+        </p>
+      </div>
+
+      <div class="topics-grid">
+        {educationalTopics.map(topic => (
+          <div class="topic-card">
+            <h3>{topic.title}</h3>
+            <p>{topic.desc}</p>
+            <div class="topic-formula">
+              <code>{topic.formula}</code>
+            </div>
+            <a href={topic.link} class="topic-link">
+              {topic.cta} →
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Deep Dive Article Section -->
+      <section class="deep-dive-box">
+        <h2>The Core Principle: Time in the Market vs Timing the Market</h2>
+        <p>
+          In financial mathematics, the exponential exponent $t$ (time) is the most powerful variable in the compounding formula $A = P(1 + r)^t$. Small variations in time produce vastly larger wealth outcomes than small variations in rate of return $r$.
+        </p>
+        <p>
+          For example, investing ₹10,000 per month for 30 years at 12% generates <strong>₹3.53 Crore</strong>. Investing that same ₹10,000 per month for only 15 years yields <strong>₹50.45 Lakh</strong>. Doubling the time horizon from 15 to 30 years multiplies the final wealth by <strong>700%</strong>!
+        </p>
+        <a href={`${base}/calculators/time-to-money-calculator/`} class="btn btn-primary">
+          Calculate Your Personal Time Horizon
+        </a>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .learn-page {
+    padding: 3.5rem 0 5rem;
+  }
+
+  .learn-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .learn-header h1 {
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  .learn-subheadline {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.75rem;
+    margin-bottom: 4rem;
+  }
+
+  .topic-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+  }
+
+  .topic-card:hover {
+    border-color: var(--accent-indigo);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .topic-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .topic-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+
+  .topic-formula {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .topic-formula code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-indigo);
+  }
+
+  .topic-link {
+    margin-top: auto;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    transition: color 0.15s ease;
+  }
+
+  .topic-link:hover {
+    text-decoration: underline;
+  }
+
+  .deep-dive-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .deep-dive-box h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .deep-dive-box p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+</style>

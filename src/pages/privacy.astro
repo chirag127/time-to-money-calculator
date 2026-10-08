@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="Privacy Policy — Time to Money Calculator"
+  description="Our privacy pledge: 100% client-side computing. Your financial calculations and data never leave your browser."
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Privacy Policy', url: '/privacy/' }
+  ]}
+>
+  <div class="legal-page">
+    <div class="container legal-container">
+      <span class="badge badge-emerald">Privacy First</span>
+      <h1>Privacy Policy</h1>
+      <p class="last-updated">Last Updated: October 2026</p>
+
+      <div class="legal-content">
+        <h2>1. Client-Side Only Architecture</h2>
+        <p>
+          The core calculation engine of <strong>Time to Money Calculator</strong> runs entirely within your web browser (client-side JavaScript). When you input savings, wealth goals, annual returns, salaries, or withdrawal schedules, this information is <strong>never transmitted to our servers or any third-party APIs</strong>.
+        </p>
+
+        <h2>2. Local Storage</h2>
+        <p>
+          We use local storage strictly to remember your user interface preferences:
+        </p>
+        <ul>
+          <li>Your theme preference (Light or Dark mode).</li>
+          <li>Your preferred currency symbol (e.g. ₹ INR, $ USD).</li>
+          <li>Your preferred number display format (Indian Lakhs/Crores vs International Millions).</li>
+        </ul>
+        <p>
+          This data remains solely on your device and can be cleared at any time by clearing your browser cache.
+        </p>
+
+        <h2>3. Shareable URLs</h2>
+        <p>
+          If you use the "Share Link" feature, the calculator encodes your inputs directly into the URL query parameters (e.g., <code>?ca=100000&ta=1000000</code>). This allows you to bookmark or send a scenario to a friend without requiring any server-side database.
+        </p>
+
+        <h2>4. No Analytics or Intrusive Tracking</h2>
+        <p>
+          We do not sell, rent, or monetize your personal financial data. No financial accounts, bank logins, or identifying credentials are ever requested.
+        </p>
+
+        <h2>5. Contact</h2>
+        <p>
+          For privacy inquiries, contact Chirag Singhal directly at <a href="mailto:chirag@oriz.in">chirag@oriz.in</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .legal-page { padding: 3.5rem 0 5rem; }
+  .legal-container { max-width: 800px; }
+  h1 { margin: 0.5rem 0 0.25rem; }
+  .last-updated { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; }
+  .legal-content h2 { font-size: 1.3rem; margin: 2rem 0 0.75rem; }
+  .legal-content p { font-size: 1rem; line-height: 1.7; margin-bottom: 1.25rem; color: var(--text-secondary); }
+  .legal-content ul { margin: 0 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.6; }
+  .legal-content a { color: var(--accent-primary); text-decoration: underline; }
+</style>

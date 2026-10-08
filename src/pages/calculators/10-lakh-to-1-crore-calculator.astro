@@ -1,0 +1,72 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Multiplying ₹10 Lakh to ₹1 Crore at 12% Annualized Return',
+  description: 'An investor has an existing portfolio of ₹10,00,000 and wants to know when it multiplies 10x into ₹1 Crore.',
+  steps: [
+    { label: 'Current Capital', value: '₹10,00,000 (₹10 Lakh)' },
+    { label: 'Target Capital', value: '₹1,00,00,000 (₹1 Crore)' },
+    { label: 'Annualized Return', value: '12% p.a.' },
+    { label: 'With Zero Additional Investment', value: '~20.3 Years' },
+    { label: 'With ₹15,000/mo SIP', value: '~9.8 Years' },
+    { label: 'With ₹30,000/mo SIP', value: '~7.2 Years' }
+  ],
+  result: 'Adding a ₹20k monthly SIP cuts your time from 20 years down to under 8.5 years!'
+};
+
+const faqItems = [
+  {
+    question: 'How many years does ₹10 Lakh take to become ₹1 Crore with no extra investment?',
+    answer: 'Using compound interest formula: t = ln(10) / ln(1 + r). At a 12% annual return, ₹10 Lakh grows into ₹1 Crore in approximately 20.3 years. At 15% return, it takes approximately 16.5 years.'
+  },
+  {
+    question: 'How does adding a monthly SIP speed up reaching ₹1 Crore from ₹10 Lakh?',
+    answer: 'Adding a monthly SIP adds fresh capital right when compounding is most powerful. A ₹25,000/month SIP added to a ₹10 Lakh corpus at 12% reaches ₹1 Crore in just 8 years instead of 20 years.'
+  }
+];
+
+const relatedCalculators = [
+  {
+    title: '1 Crore Calculator',
+    desc: 'Complete guide and simulator to reach ₹1 Crore.',
+    path: `${base}/calculators/1-crore-calculator/`
+  },
+  {
+    title: 'Time to Target Calculator',
+    desc: 'Calculate time for custom starting and ending sums.',
+    path: `${base}/calculators/time-to-money-calculator/`
+  },
+  {
+    title: 'CAGR Calculator',
+    desc: 'Compute the annualized return of 10x growth.',
+    path: `${base}/calculators/cagr-calculator/`
+  }
+];
+---
+
+<CalculatorPageShell
+  title="₹10 Lakh to ₹1 Crore Calculator — 10x Wealth Multiplier Roadmap"
+  description="Calculate how many years it takes for ₹10 Lakh to become ₹1 Crore with compound interest alone versus with monthly SIP contributions."
+  badge="10x Growth Model"
+  headline="₹10 Lakh to ₹1 Crore Calculator"
+  subheadline="Find out how long it takes for your ₹10 Lakh corpus to 10x into ₹1 Crore with compounding and smart monthly top-ups."
+  initialMode="time"
+  initialTarget={10000000}
+  initialCurrent={1000000}
+  initialReturn={12}
+  initialMonthly={15000}
+  formulaTitle="10x Compounding Horizon"
+  formulaCode="t = ln(Target / Principal) / ln(1 + r)"
+  formulaExplanation="<p>To multiply a lump sum tenfold without additions: 10 = (1 + r)^t. Taking natural logarithms, t = ln(10) / ln(1 + r). Adding monthly contributions turns this into an annuity problem where fresh monthly cash flow accelerates reaching the milestone significantly.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: '10 Lakh to 1 Crore', url: '/calculators/10-lakh-to-1-crore-calculator/' }
+  ]}
+/>

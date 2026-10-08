@@ -1,0 +1,60 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Real Purchasing Power of ₹50 Lakh in 15 Years at 6% Inflation',
+  description: 'Examining what a ₹50 Lakh wealth goal today will actually be worth in real purchasing power 15 years later.',
+  steps: [
+    { label: 'Current Amount', value: '₹50,00,000' },
+    { label: 'Annual Inflation Rate', value: '6% p.a.' },
+    { label: 'Time Horizon', value: '15 Years' },
+    { label: 'Inflation Factor', value: '2.396' },
+    { label: 'Future Value Required to Buy Same Goods', value: '₹1,19,82,000 (~₹1.2 Crore)' },
+    { label: 'Future Purchasing Power of Today’s ₹50L', value: '₹20,86,000' }
+  ],
+  result: 'You need approximately ₹1.2 Crore in 15 years to buy what ₹50 Lakh buys today.'
+};
+
+const faqItems = [
+  {
+    question: 'What is the Fisher Equation for Real Return?',
+    answer: 'The Fisher Equation relates nominal return (r), inflation (i), and real return (r_real): (1 + r) = (1 + r_real) × (1 + i). Rearranging gives r_real = [(1 + r) / (1 + i)] - 1. For example, a 12% nominal return with 6% inflation yields a real return of [(1.12 / 1.06) - 1] = 5.66% p.a.'
+  },
+  {
+    question: 'Why must every financial goal be adjusted for inflation?',
+    answer: 'If you plan to retire on ₹1 Crore in 20 years without inflation indexing at 6%, your real lifestyle purchasing power will be equivalent to only ~₹31 Lakh today. Factoring in inflation ensures your goal remains realistic.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'Time to Target Calculator', desc: 'Calculate years to reach target with inflation toggle.', path: `${base}/calculators/time-to-money-calculator/` },
+  { title: 'Future Value Calculator', desc: 'See inflation-discounted future value.', path: `${base}/calculators/future-value-calculator/` },
+  { title: 'Retirement Calculator', desc: 'Design an inflation-proof retirement plan.', path: `${base}/calculators/retirement-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="Inflation Calculator — Real Purchasing Power & Fisher Equation"
+  description="Calculate future purchasing power loss, required future money goal, and real rate of return adjusted for annual inflation using the Fisher Equation."
+  badge="Macroeconomics & Purchasing Power"
+  headline="Inflation & Real Return Calculator"
+  subheadline="Unmask the silent wealth eroder. Calculate how much your money will buy in the future and what nominal target is required to maintain your living standards."
+  initialMode="future"
+  initialCurrent={5000000}
+  initialReturn={12}
+  initialMonthly={0}
+  initialYears={15}
+  formulaTitle="Inflation Discounting & Fisher Equation"
+  formulaCode="Real Value = Nominal Amount / (1 + i)^t | Real Rate = [ (1 + r) / (1 + i) ] - 1"
+  formulaExplanation="<p>Where i is the annual inflation rate, t is the number of years, and r is the nominal rate of return. The exact Fisher Equation provides accurate compounding real returns rather than the naive approximation (r - i).</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'Inflation Calculator', url: '/calculators/inflation-calculator/' }
+  ]}
+/>

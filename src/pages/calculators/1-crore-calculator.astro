@@ -1,0 +1,76 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Reaching ₹1 Crore in 15 Years at 12% Return',
+  description: 'A 28-year-old investor starting with ₹50,000 initial savings wants to build a ₹1 Crore corpus by age 43.',
+  steps: [
+    { label: 'Target Milestone', value: '₹1,00,00,000 (₹1 Crore)' },
+    { label: 'Time Horizon', value: '15 Years' },
+    { label: 'Expected Return', value: '12% p.a.' },
+    { label: 'Required Monthly SIP', value: '₹20,000 / month' },
+    { label: 'Total Invested Over 15 Yrs', value: '₹36,50,000' },
+    { label: 'Total Compound Growth', value: '₹63,50,000 (63.5% of corpus)' }
+  ],
+  result: '₹1,00,00,000 achieved with over 63% generated purely by compound growth!'
+};
+
+const faqItems = [
+  {
+    question: 'How long does it take to reach ₹1 Crore with ₹10,000 per month?',
+    answer: 'At an expected annual return of 12%, investing ₹10,000 per month will reach ₹1 Crore in approximately 20.5 years. If you increase your SIP by 10% each year (Step-Up SIP), you can achieve ₹1 Crore in just 15 years.'
+  },
+  {
+    question: 'What return is needed to reach ₹1 Crore in 10 years with ₹25,000/month?',
+    answer: 'Investing ₹25,000 monthly for 10 years amounts to ₹30 Lakhs invested. To reach ₹1 Crore, an annualized return of approximately 19.5% p.a. is required, which carries higher volatility.'
+  },
+  {
+    question: 'How much is ₹1 Crore worth in 15 years after inflation?',
+    answer: 'Assuming a long-term inflation rate of 6% per annum, ₹1 Crore in 15 years will have the equivalent purchasing power of approximately ₹41.7 Lakhs in today’s money. To achieve today’s ₹1 Crore purchasing power in 15 years, you need a future nominal target of ~₹2.4 Crore.'
+  }
+];
+
+const relatedCalculators = [
+  {
+    title: '10 Lakh to 1 Crore Calculator',
+    desc: 'See how fast an existing 10 Lakh portfolio reaches 1 Crore.',
+    path: `${base}/calculators/10-lakh-to-1-crore-calculator/`
+  },
+  {
+    title: 'SIP Return Calculator',
+    desc: 'Simulate step-up mutual fund SIP returns.',
+    path: `${base}/calculators/sip-calculator/`
+  },
+  {
+    title: 'Future Value Calculator',
+    desc: 'Forecast portfolio values across any horizon.',
+    path: `${base}/calculators/future-value-calculator/`
+  }
+];
+---
+
+<CalculatorPageShell
+  title="₹1 Crore Calculator — How to Reach 1 Crore Investment Goal"
+  description="Calculate the monthly SIP, initial lump sum, and time needed to reach ₹1 Crore (10 Million INR) with compound interest and inflation adjustments."
+  badge="Flagship Milestone"
+  headline="₹1 Crore Wealth Calculator"
+  subheadline="Plan your journey to the iconic 8-figure milestone. Discover how much to invest monthly, how many years it takes, and how compounding accelerates your path."
+  initialMode="time"
+  initialTarget={10000000}
+  initialCurrent={100000}
+  initialReturn={12}
+  initialMonthly={20000}
+  formulaTitle="Annuity Future Value Formula for ₹1 Crore"
+  formulaCode="10,000,000 = P(1 + r)^t + PMT × [ ((1 + r/12)^(12t) - 1) / (r/12) ]"
+  formulaExplanation="<p>To reach ₹1 Crore (₹100 Lakhs), you can either invest a one-time lump sum today, invest a fixed monthly SIP, or combine both with an annual step-up SIP. In a 15-year equity SIP at 12%, more than 60% of your final ₹1 Crore corpus comes from compounding interest rather than your out-of-pocket contributions.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: '1 Crore Calculator', url: '/calculators/1-crore-calculator/' }
+  ]}
+/>

@@ -1,0 +1,76 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Growing ₹1,00,000 to ₹10,00,000 at 12% with ₹10,000/mo SIP',
+  description: 'A working professional with ₹1 Lakh initial corpus decides to invest ₹10,000 per month into equity mutual funds expecting 12% annualized returns.',
+  steps: [
+    { label: 'Initial Savings', value: '₹1,00,000' },
+    { label: 'Target Goal', value: '₹10,00,000' },
+    { label: 'Expected Return', value: '12% p.a.' },
+    { label: 'Monthly SIP', value: '₹10,000 / month' },
+    { label: 'Total Invested Capital', value: '₹5,80,000' },
+    { label: 'Compound Wealth Growth', value: '₹4,20,000' }
+  ],
+  result: 'Target reached in approximately 4 Years 8 Months'
+};
+
+const faqItems = [
+  {
+    question: 'How does the Time to Target calculation work?',
+    answer: 'The calculator performs a month-by-month financial simulation incorporating your initial corpus, monthly contributions, compounding frequency, and optional step-up SIP hikes. It continues until the portfolio balance mathematically matches or surpasses your target.'
+  },
+  {
+    question: 'What happens if I increase my monthly contribution by 10% each year?',
+    answer: 'Implementing a 10% annual Step-Up SIP significantly shortens the duration to your target—often by 25% to 35%—because your contributions scale proportionally with your annual income raises.'
+  },
+  {
+    question: 'Can this calculator account for inflation?',
+    answer: 'Yes! Toggle the Advanced Parameters section to enter an expected inflation rate (e.g. 6%). The calculator will compute both the nominal target and the inflation-adjusted target required to preserve your purchasing power.'
+  }
+];
+
+const relatedCalculators = [
+  {
+    title: '₹1 Crore Wealth Calculator',
+    desc: 'Plan your path to ₹1 Crore with milestone roadmaps.',
+    path: `${base}/calculators/1-crore-calculator/`
+  },
+  {
+    title: 'Future Value Calculator',
+    desc: 'Calculate what a fixed corpus grows to after a fixed number of years.',
+    path: `${base}/calculators/future-value-calculator/`
+  },
+  {
+    title: 'Required Return Calculator',
+    desc: 'Find the minimum rate of return needed to reach your target by a set date.',
+    path: `${base}/calculators/required-return-calculator/`
+  }
+];
+---
+
+<CalculatorPageShell
+  title="Time to Target Calculator — How Long to Reach Your Wealth Goal"
+  description="Calculate the exact years and months needed to reach your target savings or investment goal with initial principal, monthly SIP, and expected annual returns."
+  badge="Flagship Tool"
+  headline="Time to Target Calculator"
+  subheadline="Find out exactly how many years, months, and days it will take to grow your money into your dream financial milestone."
+  initialMode="time"
+  initialTarget={10000000}
+  initialCurrent={500000}
+  initialReturn={12}
+  initialMonthly={20000}
+  formulaTitle="Numerical Timeline Solver"
+  formulaCode="Balance(m) = Balance(m-1) × (1 + r/12) + SIP(m)"
+  formulaExplanation="<p>Rather than relying on basic continuous compounding shortcuts that miss periodic cash flow timing, our engine simulates monthly periodic compounding with optional beginning-of-period (annuity due) or end-of-period cash flows, annual step-up increments, and inflation discounting.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'Time to Target Calculator', url: '/calculators/time-to-money-calculator/' }
+  ]}
+/>

@@ -1,0 +1,450 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InteractiveCalculator from './InteractiveCalculator';
+
+interface Props {
+  title: string;
+  description: string;
+  badge?: string;
+  headline: string;
+  subheadline: string;
+  initialMode?: 'time' | 'future' | 'return' | 'lump' | 'sip' | 'swp' | 'scenarios';
+  initialTarget?: number;
+  initialCurrent?: number;
+  initialReturn?: number;
+  initialMonthly?: number;
+  initialYears?: number;
+  formulaTitle: string;
+  formulaCode: string;
+  formulaExplanation: string;
+  workedExample: {
+    title: string;
+    description: string;
+    steps: Array<{ label: string; value: string }>;
+    result: string;
+  };
+  faqItems: Array<{ question: string; answer: string }>;
+  relatedCalculators?: Array<{ title: string; desc: string; path: string }>;
+  breadcrumbs: Array<{ name: string; url: string }>;
+}
+
+const {
+  title,
+  description,
+  badge = 'Financial Calculator',
+  headline,
+  subheadline,
+  initialMode = 'time',
+  initialTarget = 10000000,
+  initialCurrent = 100000,
+  initialReturn = 12,
+  initialMonthly = 20000,
+  initialYears = 10,
+  formulaTitle,
+  formulaCode,
+  formulaExplanation,
+  workedExample,
+  faqItems,
+  relatedCalculators = [],
+  breadcrumbs
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  faqSchema={faqItems}
+  breadcrumbs={breadcrumbs}
+>
+  <!-- Page Header & Breadcrumbs -->
+  <section class="page-header-section">
+    <div class="container">
+      <nav class="breadcrumb-nav" aria-label="Breadcrumbs">
+        <ol class="breadcrumb-list">
+          <li><a href={`${base}/`}>Home</a></li>
+          <li><span>/</span></li>
+          <li><a href={`${base}/calculators/`}>Calculators</a></li>
+          {breadcrumbs.slice(2).map(crumb => (
+            <>
+              <li><span>/</span></li>
+              <li class="active">{crumb.name}</li>
+            </>
+          ))}
+        </ol>
+      </nav>
+
+      <div class="page-intro">
+        <span class="badge badge-emerald">{badge}</span>
+        <h1>{headline}</h1>
+        <p class="page-subheadline">{subheadline}</p>
+      </div>
+
+      <!-- Interactive Calculator Embed -->
+      <InteractiveCalculator
+        client:load
+        initialMode={initialMode}
+        initialTarget={initialTarget}
+        initialCurrent={initialCurrent}
+        initialReturn={initialReturn}
+        initialMonthly={initialMonthly}
+        initialYears={initialYears}
+        calculatorTitle={headline}
+      />
+    </div>
+  </section>
+
+  <!-- Educational & Formula Section -->
+  <section class="math-deep-dive-section">
+    <div class="container">
+      <div class="math-grid">
+        <!-- Formula & Mechanics -->
+        <div class="math-card">
+          <div class="card-tag">Mathematical Mechanics</div>
+          <h2>{formulaTitle}</h2>
+          <div class="formula-box">
+            <code>{formulaCode}</code>
+          </div>
+          <div class="math-explanation-text" set:html={formulaExplanation} />
+        </div>
+
+        <!-- Practical Worked Example -->
+        <div class="example-card">
+          <div class="card-tag">Worked Practical Example</div>
+          <h3>{workedExample.title}</h3>
+          <p class="example-desc">{workedExample.description}</p>
+          <div class="example-steps-list">
+            {workedExample.steps.map(step => (
+              <div class="step-row">
+                <span class="step-label">{step.label}:</span>
+                <span class="step-val">{step.value}</span>
+              </div>
+            ))}
+          </div>
+          <div class="example-result-box">
+            <span class="res-title">Final Calculation Outcome:</span>
+            <div class="res-text">{workedExample.result}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dedicated FAQs -->
+  <section class="page-faq-section">
+    <div class="container">
+      <div class="section-intro">
+        <span class="badge badge-amber">Common Questions</span>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-accordion-list">
+        {faqItems.map((faq, i) => (
+          <details class="faq-accordion-item" open={i === 0}>
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <span class="faq-icon">+</span>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Calculators -->
+  {relatedCalculators.length > 0 && (
+    <section class="related-tools-section">
+      <div class="container">
+        <div class="section-intro">
+          <span class="badge badge-indigo">Complementary Tools</span>
+          <h2>Related Financial Calculators</h2>
+        </div>
+
+        <div class="related-grid">
+          {relatedCalculators.map(c => (
+            <a href={c.path} class="related-card">
+              <h4>{c.title}</h4>
+              <p>{c.desc}</p>
+              <span class="related-link-text">Launch Calculator →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .page-header-section {
+    padding: 2.5rem 0 3.5rem;
+  }
+
+  .breadcrumb-nav {
+    margin-bottom: 1.5rem;
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .breadcrumb-list a:hover {
+    color: var(--accent-primary);
+  }
+
+  .breadcrumb-list .active {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .page-intro {
+    margin-bottom: 2rem;
+  }
+
+  .page-intro h1 {
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .page-subheadline {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+    line-height: 1.6;
+  }
+
+  /* Math Section */
+  .math-deep-dive-section {
+    padding: 4rem 0;
+    background: var(--bg-tertiary);
+  }
+
+  .math-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 860px) {
+    .math-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .math-card, .example-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .card-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .math-card h2 {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+
+  .formula-box {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.25rem;
+  }
+
+  .formula-box code {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--accent-primary);
+    display: block;
+    overflow-x: auto;
+  }
+
+  .math-explanation-text {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .example-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .example-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .example-steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .step-label {
+    color: var(--text-muted);
+  }
+
+  .step-val {
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .example-result-box {
+    background: var(--accent-primary-light);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+  }
+
+  .res-title {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin-bottom: 0.35rem;
+  }
+
+  .res-text {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  /* FAQ */
+  .page-faq-section {
+    padding: 4rem 0;
+  }
+
+  .section-intro {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .section-intro h2 {
+    margin-top: 0.5rem;
+  }
+
+  .faq-accordion-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-accordion-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.25rem;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-icon {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--accent-primary);
+  }
+
+  .faq-accordion-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 1.25rem 1.25rem;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Related */
+  .related-tools-section {
+    padding: 4rem 0;
+    background: var(--bg-tertiary);
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .related-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+  }
+
+  .related-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+  }
+
+  .related-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .related-card p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .related-link-text {
+    margin-top: auto;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+  }
+</style>

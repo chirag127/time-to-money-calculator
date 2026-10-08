@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="The Rule of 72 Explained — Fast Mental Math for Doubling Money"
+  description="Learn how the Rule of 72 works, its mathematical derivation from natural logarithms, when it is accurate, and how to use it for investing and inflation."
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Learn', url: '/learn/' },
+    { name: 'Rule of 72 Guide', url: '/guides/rule-of-72/' }
+  ]}
+>
+  <div class="guide-article-page">
+    <div class="container article-container">
+      <nav class="breadcrumb-nav">
+        <a href={`${base}/`}>Home</a> / <a href={`${base}/learn/`}>Learn</a> / <span>Rule of 72</span>
+      </nav>
+
+      <span class="badge badge-emerald">Mental Financial Models</span>
+      <h1>The Rule of 72: How to Double Your Money</h1>
+      <p class="article-lead">
+        The Rule of 72 is one of the most famous heuristics in finance. It allows you to rapidly estimate the number of years required to double your investment at a fixed annual rate of return without needing a calculator.
+      </p>
+
+      <div class="article-body">
+        <h2>The Core Formula</h2>
+        <div class="formula-callout">
+          <code>Years to Double ≈ 72 / Expected Annual Return (%)</code>
+        </div>
+        <p>
+          For example:
+        </p>
+        <ul>
+          <li>At <strong>6% annual return</strong> (Fixed Deposits): 72 / 6 = <strong>12 Years</strong> to double.</li>
+          <li>At <strong>8% annual return</strong> (Balanced Funds): 72 / 8 = <strong>9 Years</strong> to double.</li>
+          <li>At <strong>12% annual return</strong> (Equity Index Funds): 72 / 12 = <strong>6 Years</strong> to double.</li>
+          <li>At <strong>18% annual return</strong> (High Growth Stocks): 72 / 18 = <strong>4 Years</strong> to double.</li>
+        </ul>
+
+        <h2>Mathematical Derivation</h2>
+        <p>
+          Where does the number 72 come from? It originates from continuous compounding:
+        </p>
+        <p>
+          If an initial investment $P$ doubles to $2P$ at continuous rate $r$ in time $t$:
+        </p>
+        <div class="math-proof">
+          2P = P × e^(rt)<br/>
+          2 = e^(rt)<br/>
+          ln(2) = rt<br/>
+          0.6931 = rt<br/>
+          t = 0.6931 / r
+        </div>
+        <p>
+          For discrete annual compounding at rates between 6% and 10%, 72 is chosen over 69.3 because 72 has many convenient divisors (2, 3, 4, 6, 8, 9, 12, 18, 24, 36), making mental calculation instantaneous.
+        </p>
+
+        <h2>Applying the Rule of 72 in Reverse (Inflation Halving Time)</h2>
+        <p>
+          You can also apply the Rule of 72 to inflation to determine how fast your purchasing power is cut in half:
+        </p>
+        <div class="formula-callout">
+          <code>Years to Halve Purchasing Power ≈ 72 / Inflation Rate (%)</code>
+        </div>
+        <p>
+          At an average inflation rate of <strong>6%</strong>, the real value of your cash drops by 50% in approximately <strong>12 years</strong>.
+        </p>
+
+        <div class="cta-box">
+          <h3>Test the Exact Math</h3>
+          <p>Don't settle for estimates when you can get exact days and months with monthly contributions.</p>
+          <a href={`${base}/calculators/time-to-money-calculator/`} class="btn btn-primary">
+            Launch Time to Target Calculator →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .guide-article-page {
+    padding: 3rem 0 5rem;
+  }
+
+  .article-container {
+    max-width: 780px;
+  }
+
+  .breadcrumb-nav {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .breadcrumb-nav a:hover {
+    color: var(--accent-primary);
+  }
+
+  h1 {
+    margin: 0.75rem 0 1.25rem;
+  }
+
+  .article-lead {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+
+  .article-body h2 {
+    font-size: 1.45rem;
+    margin: 2rem 0 1rem;
+  }
+
+  .article-body p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .article-body ul {
+    margin: 0 0 1.5rem 1.5rem;
+    font-size: 0.98rem;
+    color: var(--text-secondary);
+  }
+
+  .article-body li {
+    margin-bottom: 0.5rem;
+  }
+
+  .formula-callout {
+    background: var(--bg-tertiary);
+    border-left: 4px solid var(--accent-primary);
+    padding: 1.25rem;
+    border-radius: var(--radius-sm);
+    margin: 1.25rem 0;
+  }
+
+  .formula-callout code {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--accent-primary);
+  }
+
+  .math-proof {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    margin: 1rem 0;
+    line-height: 1.6;
+  }
+
+  .cta-box {
+    margin-top: 3rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .cta-box h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-box p {
+    margin-bottom: 1.25rem;
+  }
+</style>

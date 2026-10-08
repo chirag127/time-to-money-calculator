@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chirag127.github.io/time-to-money-calculator/sitemap-index.xml

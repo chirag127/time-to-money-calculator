@@ -1,0 +1,59 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Calculating CAGR from ₹1,00,000 to ₹3,50,000 over 7 Years',
+  description: 'An equity portfolio grew from ₹1 Lakh to ₹3.5 Lakh over 7 years.',
+  steps: [
+    { label: 'Initial Value', value: '₹1,00,000' },
+    { label: 'Final Value', value: '₹3,50,000' },
+    { label: 'Investment Horizon', value: '7 Years' },
+    { label: 'Total Absolute Return', value: '250%' },
+    { label: 'Annualized Compounded Rate (CAGR)', value: '19.6% p.a.' }
+  ],
+  result: 'CAGR is 19.6% per annum (smoothed geometric annual growth rate)'
+};
+
+const faqItems = [
+  {
+    question: 'What is CAGR?',
+    answer: 'CAGR (Compound Annual Growth Rate) represents the constant rate at which an investment would have grown if it grew at an even, compounded rate every year over the entire investment duration.'
+  },
+  {
+    question: 'Why is CAGR better than simple average return?',
+    answer: 'Simple average returns distort volatility (e.g. +50% in Year 1 followed by -50% in Year 2 is an average return of 0%, but your actual capital lost 25%). CAGR measures true geometric compounding and reflects actual money made.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'XIRR Calculator', desc: 'Compute return for irregular SIP cashflows.', path: `${base}/calculators/xirr-calculator/` },
+  { title: 'Required Return Calculator', desc: 'Find return needed to achieve your goal.', path: `${base}/calculators/required-return-calculator/` },
+  { title: 'Time to Target Calculator', desc: 'Calculate time needed for your money goal.', path: `${base}/calculators/time-to-money-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="CAGR Calculator — Compound Annual Growth Rate Calculator"
+  description="Calculate CAGR (Compound Annual Growth Rate) for your stocks, mutual funds, and real estate investments. Understand true annualized geometric performance."
+  badge="Investment Metrics"
+  headline="CAGR Calculator"
+  subheadline="Accurately compute the Compound Annual Growth Rate for point-to-point investment horizons."
+  initialMode="return"
+  initialCurrent={100000}
+  initialTarget={350000}
+  initialYears={7}
+  initialMonthly={0}
+  formulaTitle="CAGR Mathematical Formula"
+  formulaCode="CAGR = ( Ending Value / Beginning Value )^(1 / t) - 1"
+  formulaExplanation="<p>Where Ending Value is the final portfolio balance, Beginning Value is the starting capital, and t is the investment duration in years. Multiply by 100 to express as an annual percentage.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'CAGR Calculator', url: '/calculators/cagr-calculator/' }
+  ]}
+/>

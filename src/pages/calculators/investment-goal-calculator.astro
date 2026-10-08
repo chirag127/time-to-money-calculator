@@ -1,0 +1,61 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Planning a ₹25,00,000 Milestone (House Down Payment / Higher Education)',
+  description: 'An investor wanting to accumulate ₹25 Lakh in 5 years starting with ₹2,00,000 savings.',
+  steps: [
+    { label: 'Current Savings', value: '₹2,00,000' },
+    { label: 'Target Goal', value: '₹25,00,000' },
+    { label: 'Time Horizon', value: '5 Years' },
+    { label: 'Expected Return', value: '11% p.a.' },
+    { label: 'Required Monthly SIP', value: '₹26,800 / month' },
+    { label: 'Total Capital Invested', value: '₹18,08,000' },
+    { label: 'Compound Interest Generated', value: '₹6,92,000' }
+  ],
+  result: 'Goal achieved in 5 Years with ₹26,800/month contribution!'
+};
+
+const faqItems = [
+  {
+    question: 'How do I plan for multiple distinct financial goals?',
+    answer: 'Segment your goals by time horizon: Short-term (<3 years: debt/arbitrage funds), Medium-term (3-7 years: hybrid funds), and Long-term (>7 years: diversified equity index funds).'
+  },
+  {
+    question: 'Should I keep emergency funds separate from goal investing?',
+    answer: 'Yes. Maintain 6 to 12 months of non-negotiable living expenses in liquid funds or bank fixed deposits before locking capital into growth investments for long-term targets.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'Time to Target Calculator', desc: 'Find how many years to reach your goal.', path: `${base}/calculators/time-to-money-calculator/` },
+  { title: 'Monthly Investment Calculator', desc: 'Find required monthly contribution.', path: `${base}/calculators/monthly-investment-calculator/` },
+  { title: '1 Crore Calculator', desc: 'Plan roadmap to ₹1 Crore.', path: `${base}/calculators/1-crore-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="Investment Goal Calculator — Plan Car, House, Education & Wealth Targets"
+  description="Calculate the time, monthly savings, and lump sum required to reach any custom financial goal (wedding, home down payment, college, retirement)."
+  badge="Goal Planning"
+  headline="Investment Goal Calculator"
+  subheadline="Set custom life milestones and reverse-engineer the exact monthly savings and investment returns needed to make them reality."
+  initialMode="time"
+  initialTarget={2500000}
+  initialCurrent={200000}
+  initialReturn={11}
+  initialMonthly={25000}
+  formulaTitle="Goal Gap Reverse Engineering"
+  formulaCode="Goal Gap = Target Amount - PV(1 + r)^t"
+  formulaExplanation="<p>Our engine projects the compound growth of your current assets to your goal deadline, isolates any remaining shortfall, and calculates the exact monthly contribution or return rate needed to bridge the gap.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'Investment Goal Calculator', url: '/calculators/investment-goal-calculator/' }
+  ]}
+/>

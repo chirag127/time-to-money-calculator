@@ -1,0 +1,60 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Future Value of ₹5 Lakh + ₹15,000/mo over 10 Years at 12%',
+  description: 'Projecting 10 years into the future with an initial lump sum and consistent monthly contributions.',
+  steps: [
+    { label: 'Initial Principal', value: '₹5,00,000' },
+    { label: 'Monthly Addition', value: '₹15,000' },
+    { label: 'Annual Rate', value: '12% p.a.' },
+    { label: 'Time Horizon', value: '10 Years' },
+    { label: 'Principal Invested', value: '₹23,00,000' },
+    { label: 'Compound Interest Earned', value: '₹27,47,000' }
+  ],
+  result: 'Future Value: ₹50,47,000 (Over 50 Lakhs accumulated)'
+};
+
+const faqItems = [
+  {
+    question: 'What is the formula for Future Value (FV)?',
+    answer: 'The future value of a single sum is FV = PV × (1 + r)^t. When combined with regular monthly payments PMT, the total future value is FV = PV(1 + r/n)^(nt) + PMT × [ ((1 + r/n)^(nt) - 1) / (r/n) ].'
+  },
+  {
+    question: 'How does compounding frequency impact Future Value?',
+    answer: 'The more frequently compounding occurs (daily vs monthly vs annually), the higher the effective annual yield because interest starts earning interest sooner.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'Time to Target Calculator', desc: 'Find how many years to reach a specific target.', path: `${base}/calculators/time-to-money-calculator/` },
+  { title: 'Compound Interest Calculator', desc: 'Detailed compound interest breakdown.', path: `${base}/calculators/compound-interest-calculator/` },
+  { title: 'SIP Calculator', desc: 'Calculate mutual fund SIP growth.', path: `${base}/calculators/sip-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="Future Value Calculator — Calculate Future Investment Worth"
+  description="Calculate the future value of your savings and investments with compound interest, regular monthly additions, and inflation adjustments."
+  badge="Core Financial Tool"
+  headline="Future Value Calculator"
+  subheadline="Accurately project the future worth of your investments over 5, 10, 20, or 30 years with compounding interest and regular savings."
+  initialMode="future"
+  initialCurrent={500000}
+  initialReturn={12}
+  initialMonthly={15000}
+  initialYears={10}
+  formulaTitle="Future Value (FV) Formula"
+  formulaCode="FV = PV × (1 + r/n)^(n×t) + PMT × [ ((1 + r/n)^(n×t) - 1) / (r/n) ]"
+  formulaExplanation="<p>Where PV is Present Value, r is annual interest rate, n is compounding frequency per year, t is time in years, and PMT is periodic payment. For annuity due (beginning of period payments), the annuity component is multiplied by (1 + r/n).</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'Future Value Calculator', url: '/calculators/future-value-calculator/' }
+  ]}
+/>

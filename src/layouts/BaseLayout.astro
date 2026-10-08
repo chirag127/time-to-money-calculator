@@ -1,0 +1,136 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  faqSchema?: Array<{ question: string; answer: string }>;
+  breadcrumbs?: Array<{ name: string; url: string }>;
+}
+
+const {
+  title = 'Time to Money Calculator — Calculate When Your Wealth Goal Becomes Reality',
+  description = 'Calculate how long it takes to reach your target money goal, future value of investments, required return, monthly SIP, SWP depletion, and compound growth with inflation adjustment.',
+  canonicalUrl,
+  faqSchema,
+  breadcrumbs
+} = Astro.props;
+
+const siteBase = 'https://chirag127.github.io';
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fullCanonical = canonicalUrl || `${siteBase}${basePath}${Astro.url.pathname}`;
+
+// Structured Data
+const structuredDataList: any[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Time to Money Calculator',
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'All',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD'
+    },
+    author: {
+      '@type': 'Person',
+      name: 'Chirag Singhal',
+      url: 'https://github.com/chirag127/'
+    },
+    description: description
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Time to Money Calculator',
+    url: `${siteBase}${basePath}/`
+  }
+];
+
+if (breadcrumbs && breadcrumbs.length > 0) {
+  structuredDataList.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((crumb, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: crumb.name,
+      item: `${siteBase}${basePath}${crumb.url}`
+    }))
+  });
+}
+
+if (faqSchema && faqSchema.length > 0) {
+  structuredDataList.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqSchema.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  });
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={fullCanonical} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullCanonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Time to Money Calculator" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@singhal127" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon & Colors -->
+    <link rel="icon" type="image/svg+xml" href={`${basePath}/favicon.svg`} />
+    <meta name="theme-color" content="#10b981" />
+
+    <!-- Prevent Theme Flash -->
+    <script is:inline>
+      const savedTheme = localStorage.getItem('ttm_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+
+    <!-- Schema.org JSON-LD -->
+    {structuredDataList.map(schema => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+  </head>
+  <body>
+    <div class="bg-ambient-grid"></div>
+    <Header />
+    <main id="main-content" class="site-main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .site-main {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+</style>

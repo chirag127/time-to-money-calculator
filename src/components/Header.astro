@@ -1,0 +1,275 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<header class="site-header">
+  <div class="container header-container">
+    <a href={`${base}/`} class="brand-link" aria-label="Time to Money Calculator Home">
+      <div class="brand-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">Time to Money</span>
+        <span class="brand-subtitle">Financial Goal & Return Calculator</span>
+      </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary Navigation">
+      <a href={`${base}/`} class="nav-link">Home</a>
+      <a href={`${base}/calculators/`} class="nav-link">Calculators</a>
+      <a href={`${base}/calculators/time-to-money-calculator/`} class="nav-link">Time to Target</a>
+      <a href={`${base}/calculators/1-crore-calculator/`} class="nav-link">₹1 Crore</a>
+      <a href={`${base}/learn/`} class="nav-link">Learn</a>
+      <a href={`${base}/about/`} class="nav-link">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <!-- Currency Switcher -->
+      <div class="select-wrapper">
+        <select id="currency-select" aria-label="Select Currency" class="nav-select">
+          <option value="INR">₹ INR</option>
+          <option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option>
+          <option value="GBP">£ GBP</option>
+          <option value="AED">AED</option>
+          <option value="CAD">CA$</option>
+          <option value="AUD">AU$</option>
+          <option value="SGD">SG$</option>
+        </select>
+      </div>
+
+      <!-- Indian / International Format Toggle -->
+      <button id="format-toggle-btn" class="format-btn" title="Toggle Number Format (Lakhs/Crores vs Millions)" aria-label="Toggle number format">
+        <span id="format-label" class="format-badge">Lakh / Cr</span>
+      </button>
+
+      <!-- Theme Toggle -->
+      <button id="theme-toggle-btn" class="icon-btn" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
+        <svg id="theme-sun" class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg id="theme-moon" class="theme-icon hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 0.75rem 0;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-title {
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-subtitle {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s, background-color 0.15s;
+  }
+
+  .nav-link:hover {
+    color: var(--accent-primary);
+    background-color: var(--accent-primary-light);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .select-wrapper {
+    position: relative;
+  }
+
+  .nav-select {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-medium);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .format-btn {
+    padding: 0.4rem 0.6rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+  }
+
+  .format-btn:hover {
+    border-color: var(--accent-primary);
+  }
+
+  .format-badge {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-medium);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .icon-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  @media (max-width: 860px) {
+    .nav-links {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Theme switcher logic
+  const themeToggle = document.getElementById('theme-toggle-btn');
+  const sunIcon = document.getElementById('theme-sun');
+  const moonIcon = document.getElementById('theme-moon');
+
+  function updateThemeUI(theme) {
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      sunIcon.classList.remove('hidden');
+      moonIcon.classList.add('hidden');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      sunIcon.classList.add('hidden');
+      moonIcon.classList.remove('hidden');
+    }
+  }
+
+  const currentTheme = localStorage.getItem('ttm_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  updateThemeUI(currentTheme);
+
+  themeToggle?.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const nextTheme = isDark ? 'light' : 'dark';
+    localStorage.setItem('ttm_theme', nextTheme);
+    updateThemeUI(nextTheme);
+    window.dispatchEvent(new CustomEvent('ttm-theme-change', { detail: nextTheme }));
+  });
+
+  // Currency & Format storage & synchronization
+  const currencySelect = document.getElementById('currency-select');
+  const savedCurrency = localStorage.getItem('ttm_currency') || 'INR';
+  if (currencySelect) {
+    currencySelect.value = savedCurrency;
+    currencySelect.addEventListener('change', (e) => {
+      localStorage.setItem('ttm_currency', e.target.value);
+      window.dispatchEvent(new CustomEvent('ttm-currency-change', { detail: e.target.value }));
+    });
+  }
+
+  const formatToggle = document.getElementById('format-toggle-btn');
+  const formatLabel = document.getElementById('format-label');
+  let currentFormat = localStorage.getItem('ttm_format') || 'indian';
+
+  function updateFormatUI(format) {
+    if (formatLabel) {
+      formatLabel.textContent = format === 'indian' ? 'Lakh / Cr' : 'Mil / Bil';
+    }
+  }
+  updateFormatUI(currentFormat);
+
+  formatToggle?.addEventListener('click', () => {
+    currentFormat = currentFormat === 'indian' ? 'international' : 'indian';
+    localStorage.setItem('ttm_format', currentFormat);
+    updateFormatUI(currentFormat);
+    window.dispatchEvent(new CustomEvent('ttm-format-change', { detail: currentFormat }));
+  });
+</script>

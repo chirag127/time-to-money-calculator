@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="Inflation Impact on Financial Goals — Nominal vs Real Purchasing Power"
+  description="Understand the insidious effect of inflation on long-term money goals. Learn how to calculate real purchasing power and inflation-adjusted targets."
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Learn', url: '/learn/' },
+    { name: 'Inflation Impact', url: '/guides/inflation-impact/' }
+  ]}
+>
+  <div class="guide-article-page">
+    <div class="container article-container">
+      <nav class="breadcrumb-nav">
+        <a href={`${base}/`}>Home</a> / <a href={`${base}/learn/`}>Learn</a> / <span>Inflation Impact</span>
+      </nav>
+
+      <span class="badge badge-amber">Macro Wealth Economics</span>
+      <h1>How Inflation Silently Halves Your Wealth Goals</h1>
+      <p class="article-lead">
+        Most people suffer from the "money illusion"—focusing on nominal rupee amounts rather than real purchasing power. Here is why failing to index for inflation ruins retirement plans.
+      </p>
+
+      <div class="article-body">
+        <h2>What Does 6% Inflation Actually Do to ₹1 Crore?</h2>
+        <p>
+          In India, historical consumer price inflation fluctuates between 5% and 7%. If we assume a conservative 6% annual inflation:
+        </p>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Years in Future</th>
+                <th>Purchasing Power of Today’s ₹1 Crore</th>
+                <th>Target Required to Buy What ₹1 Cr Buys Today</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Today</strong></td>
+                <td>₹1,00,00,000</td>
+                <td>₹1,00,00,000</td>
+              </tr>
+              <tr>
+                <td><strong>10 Years Later</strong></td>
+                <td>₹55,83,900 (~56 Lakhs)</td>
+                <td>₹1,79,08,500 (~1.8 Crore)</td>
+              </tr>
+              <tr>
+                <td><strong>15 Years Later</strong></td>
+                <td>₹41,72,700 (~42 Lakhs)</td>
+                <td>₹2,39,65,600 (~2.4 Crore)</td>
+              </tr>
+              <tr>
+                <td><strong>20 Years Later</strong></td>
+                <td>₹31,18,000 (~31 Lakhs)</td>
+                <td>₹3,20,71,400 (~3.2 Crore)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Real Returns vs Nominal Returns</h2>
+        <p>
+          If your bank fixed deposit yields 7% per annum and inflation is 6%, your real gain is not 7%—it is barely <strong>0.94%</strong> before taxes!
+        </p>
+        <p>
+          To create generational wealth and maintain standard of living, your portfolio must invest into productive asset classes (equity mutual funds, index funds, businesses) whose earnings grow faster than inflation.
+        </p>
+
+        <div class="cta-box">
+          <h3>Simulate Inflation for Your Goal</h3>
+          <p>Toggle our inflation switch to see your inflation-adjusted future target.</p>
+          <a href={`${base}/calculators/inflation-calculator/`} class="btn btn-primary">
+            Run Inflation Calculator →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .guide-article-page { padding: 3rem 0 5rem; }
+  .article-container { max-width: 780px; }
+  .breadcrumb-nav { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .breadcrumb-nav a:hover { color: var(--accent-primary); }
+  h1 { margin: 0.75rem 0 1.25rem; }
+  .article-lead { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 2.5rem; }
+  .article-body h2 { font-size: 1.45rem; margin: 2rem 0 1rem; }
+  .article-body p { font-size: 1rem; line-height: 1.7; margin-bottom: 1.25rem; }
+  .table-wrapper { margin: 1.5rem 0; overflow-x: auto; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .data-table th, .data-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-subtle); text-align: left; }
+  .data-table th { background: var(--bg-tertiary); font-weight: 700; color: var(--text-muted); font-size: 0.8rem; }
+  .cta-box { margin-top: 3rem; background: var(--bg-card); border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 2rem; text-align: center; }
+  .cta-box h3 { margin-bottom: 0.5rem; }
+  .cta-box p { margin-bottom: 1.25rem; }
+</style>

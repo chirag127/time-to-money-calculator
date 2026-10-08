@@ -1,0 +1,60 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Targeting ₹50 Lakh in 10 Years at 12% Expected Return',
+  description: 'Calculating the exact monthly savings needed starting from zero initial balance.',
+  steps: [
+    { label: 'Target Milestone', value: '₹50,00,000 (₹50 Lakh)' },
+    { label: 'Time Allowed', value: '10 Years (120 Months)' },
+    { label: 'Expected Return', value: '12% p.a.' },
+    { label: 'Required Monthly SIP', value: '₹21,700 / month' },
+    { label: 'Total Invested Out of Pocket', value: '₹26,04,000' },
+    { label: 'Compound Interest Generated', value: '₹23,96,000' }
+  ],
+  result: 'Invest ₹21,700/month to accumulate ₹50 Lakh in 10 years'
+};
+
+const faqItems = [
+  {
+    question: 'How is required monthly contribution calculated?',
+    answer: 'The calculator isolates the periodic payment PMT from the future value annuity formula: PMT = Gap / [ ((1 + r/n)^(nt) - 1) / (r/n) ], where Gap is the target amount minus the future compounded value of any initial savings.'
+  },
+  {
+    question: 'Can I lower my required monthly investment with step-up SIP?',
+    answer: 'Yes! If you increase your SIP by 10% annually, your starting monthly requirement will be roughly 30% to 40% lower compared to a flat, fixed SIP.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'Time to Target Calculator', desc: 'Calculate how long your current SIP takes.', path: `${base}/calculators/time-to-money-calculator/` },
+  { title: 'SIP Calculator', desc: 'Simulate mutual fund SIP wealth creation.', path: `${base}/calculators/sip-calculator/` },
+  { title: '1 Crore Calculator', desc: 'Plan roadmap to ₹1 Crore.', path: `${base}/calculators/1-crore-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="Monthly Investment Calculator — How Much to Save Each Month?"
+  description="Calculate how much you need to invest every month to reach your target savings goal by a specific year and age."
+  badge="Savings Planner"
+  headline="Monthly Investment Calculator"
+  subheadline="Find out exactly how much money to set aside each month into SIP or recurring investments to hit your financial goal."
+  initialMode="sip"
+  initialCurrent={0}
+  initialTarget={5000000}
+  initialYears={10}
+  initialReturn={12}
+  formulaTitle="Required Monthly Contribution Formula"
+  formulaCode="PMT = ( Target - PV(1 + r)^t ) / [ ((1 + r/12)^(12t) - 1) / (r/12) ]"
+  formulaExplanation="<p>Where PMT is the monthly contribution required, Target is the desired final sum, PV is your current starting balance, r is the annual rate of return, and t is the investment horizon in years.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'Monthly Investment Calculator', url: '/calculators/monthly-investment-calculator/' }
+  ]}
+/>

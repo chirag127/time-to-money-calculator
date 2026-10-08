@@ -1,0 +1,60 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Growing ₹5 Lakh to ₹25 Lakh in 7 Years with ₹10,000/mo SIP',
+  description: 'Determining the required annualized return to bridge a specific wealth gap by a hard deadline.',
+  steps: [
+    { label: 'Current Corpus', value: '₹5,00,000' },
+    { label: 'Target Milestone', value: '₹25,00,000' },
+    { label: 'Time Allowed', value: '7 Years' },
+    { label: 'Monthly SIP', value: '₹10,00,0' },
+    { label: 'Total Capital Committed', value: '₹13,40,000' },
+    { label: 'Required Compound Gain', value: '₹11,60,000' }
+  ],
+  result: 'Required Return: 13.8% p.a. (Achievable with broad equity index funds)'
+};
+
+const faqItems = [
+  {
+    question: 'What is a Required Return calculation?',
+    answer: 'Required return is the annualized interest rate or growth rate an investor must earn on their existing capital and ongoing contributions to meet a predetermined financial goal within a specified timeframe.'
+  },
+  {
+    question: 'What if the calculated required return is above 20%?',
+    answer: 'If the required return is unusually high (>20%), achieving it requires speculative risk. It is far safer to either extend your time horizon or increase your monthly contribution amount rather than taking extreme asset risks.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'Time to Target Calculator', desc: 'Find how much time is needed at a realistic rate.', path: `${base}/calculators/time-to-money-calculator/` },
+  { title: 'Monthly Investment Calculator', desc: 'Find required monthly contribution instead.', path: `${base}/calculators/monthly-investment-calculator/` },
+  { title: 'CAGR Calculator', desc: 'Calculate past annualized performance.', path: `${base}/calculators/cagr-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="Required Return Calculator — What Rate of Return Do You Need?"
+  description="Calculate the exact annualized return rate required to reach your target savings or investment goal within a specific timeframe."
+  badge="Goal Solvers"
+  headline="Required Return Calculator"
+  subheadline="Find out what annual return percentage you need to hit your target. Reverse-engineer your investment portfolio allocation."
+  initialMode="return"
+  initialCurrent={500000}
+  initialTarget={2500000}
+  initialYears={7}
+  initialMonthly={10000}
+  formulaTitle="Numerical Internal Return Solver"
+  formulaCode="Solve for r: Target = PV(1 + r)^t + PMT × [ ((1 + r/12)^(12t) - 1) / (r/12) ]"
+  formulaExplanation="<p>Because the future value equation with periodic payments cannot be solved algebraically for rate r in closed form, our engine uses iterative numerical root finding (Bisection & Newton-Raphson) to compute the exact required annual return down to two decimal places.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'Required Return', url: '/calculators/required-return-calculator/' }
+  ]}
+/>

@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const allCalculators = [
+  {
+    category: 'Target & Goal Calculators',
+    items: [
+      {
+        title: 'Time to Target Calculator',
+        desc: 'Calculate exact years, months, and days to reach any target amount with periodic investments.',
+        url: `${base}/calculators/time-to-money-calculator/`,
+        badge: 'Flagship'
+      },
+      {
+        title: '₹1 Crore Wealth Calculator',
+        desc: 'Plan the exact roadmap to accumulate ₹1 Crore in 5, 10, or 15 years with monthly SIP.',
+        url: `${base}/calculators/1-crore-calculator/`,
+        badge: 'Popular'
+      },
+      {
+        title: '₹10 Lakh to ₹1 Crore Calculator',
+        desc: 'Discover how fast a ₹10 Lakh portfolio multiplies into ₹1 Crore at varying rates of return.',
+        url: `${base}/calculators/10-lakh-to-1-crore-calculator/`,
+        badge: 'High Impact'
+      },
+      {
+        title: 'Multi-Crore Goal Planner',
+        desc: 'Model multi-crore goals (₹2 Cr, ₹5 Cr, ₹10 Cr) with step-up contributions and inflation.',
+        url: `${base}/calculators/crore-calculator/`,
+        badge: 'Wealth'
+      },
+      {
+        title: 'Investment Goal Calculator',
+        desc: 'Set custom milestone targets (car, house, education, retirement) and reverse-engineer requirements.',
+        url: `${base}/calculators/investment-goal-calculator/`,
+        badge: 'Planning'
+      }
+    ]
+  },
+  {
+    category: 'Compounding & Growth Engines',
+    items: [
+      {
+        title: 'Future Value Calculator',
+        desc: 'Compute future wealth from lump sum and recurring payments with custom compounding frequencies.',
+        url: `${base}/calculators/future-value-calculator/`,
+        badge: 'Core'
+      },
+      {
+        title: 'Compound Interest Calculator',
+        desc: 'Visualize the power of compounding with daily, monthly, quarterly, and annual frequencies.',
+        url: `${base}/calculators/compound-interest-calculator/`,
+        badge: 'Math'
+      },
+      {
+        title: 'SIP Return Calculator',
+        desc: 'Simulate mutual fund Systematic Investment Plans with annual step-up SIP hikes.',
+        url: `${base}/calculators/sip-calculator/`,
+        badge: 'SIP'
+      },
+      {
+        title: 'Lump Sum Investment Calculator',
+        desc: 'Analyze long-term wealth growth for one-time capital investments.',
+        url: `${base}/calculators/lump-sum-calculator/`,
+        badge: 'Lump Sum'
+      },
+      {
+        title: 'Monthly Investment Calculator',
+        desc: 'Calculate the required monthly savings needed to hit financial goals by a specific deadline.',
+        url: `${base}/calculators/monthly-investment-calculator/`,
+        badge: 'Budget'
+      }
+    ]
+  },
+  {
+    category: 'Return & Performance Metrics',
+    items: [
+      {
+        title: 'Required Return Calculator',
+        desc: 'Determine what annualized return rate is mathematically necessary to hit your target.',
+        url: `${base}/calculators/required-return-calculator/`,
+        badge: 'Essential'
+      },
+      {
+        title: 'CAGR Calculator',
+        desc: 'Calculate Compound Annual Growth Rate between starting and ending values.',
+        url: `${base}/calculators/cagr-calculator/`,
+        badge: 'CAGR'
+      },
+      {
+        title: 'XIRR Calculator',
+        desc: 'Compute annualized internal rate of return for irregular cash flow dates and distributions.',
+        url: `${base}/calculators/xirr-calculator/`,
+        badge: 'Advanced'
+      }
+    ]
+  },
+  {
+    category: 'Inflation & Retirement Planning',
+    items: [
+      {
+        title: 'Inflation & Real Return Calculator',
+        desc: 'Calculate future purchasing power erosion and real rate of return using the Fisher Equation.',
+        url: `${base}/calculators/inflation-calculator/`,
+        badge: 'Macro'
+      },
+      {
+        title: 'SWP / Periodic Withdrawal Calculator',
+        desc: 'Evaluate systematic monthly withdrawal sustainability and predict exact corpus depletion dates.',
+        url: `${base}/calculators/swp-calculator/`,
+        badge: 'Retirement'
+      },
+      {
+        title: 'Retirement Corpus Planner',
+        desc: 'Design an inflation-proof retirement nest egg that supports your lifestyle for 25+ years.',
+        url: `${base}/calculators/retirement-calculator/`,
+        badge: 'Independence'
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="All Financial Calculators — Time to Money Directory"
+  description="Explore all 17+ specialized financial calculators for goal planning, compound interest, SIP returns, CAGR, XIRR, inflation, and retirement withdrawals."
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' }
+  ]}
+>
+  <div class="directory-page">
+    <div class="container">
+      <div class="directory-header">
+        <span class="badge badge-emerald">Complete Catalog</span>
+        <h1>All Financial Calculators</h1>
+        <p class="directory-subheadline">
+          Comprehensive, mathematically verified calculation tools for personal finance, investment planning, and wealth creation.
+        </p>
+      </div>
+
+      <div class="categories-list">
+        {allCalculators.map(cat => (
+          <div class="category-block">
+            <h2 class="category-title">{cat.category}</h2>
+            <div class="cards-grid">
+              {cat.items.map(item => (
+                <a href={item.url} class="calc-directory-card">
+                  <div class="card-top">
+                    <span class="card-badge">{item.badge}</span>
+                    <span class="card-arrow">→</span>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .directory-page {
+    padding: 3rem 0 5rem;
+  }
+
+  .directory-header {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .directory-header h1 {
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  .directory-subheadline {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+
+  .categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .category-title {
+    font-size: 1.45rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .calc-directory-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+  }
+
+  .calc-directory-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    background: var(--accent-primary-light);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .card-arrow {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    transition: transform 0.15s ease;
+  }
+
+  .calc-directory-card:hover .card-arrow {
+    transform: translateX(4px);
+    color: var(--accent-primary);
+  }
+
+  .calc-directory-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .calc-directory-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+</style>

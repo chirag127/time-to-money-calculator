@@ -1,0 +1,858 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InteractiveCalculator from '../components/InteractiveCalculator';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const faqItems = [
+  {
+    question: 'How long does it take to double your money?',
+    answer: 'Using the mathematical Rule of 72, dividing 72 by your expected annual return provides an accurate approximation. For example, at a 12% annual return, your money doubles in approximately 72 / 12 = 6 years. With active monthly SIP contributions, wealth doubles significantly faster.'
+  },
+  {
+    question: 'How long does it take to reach ₹1 Crore starting from ₹10 Lakh?',
+    answer: 'At an expected annual return of 12% with a ₹20,000 monthly SIP contribution, a ₹10 Lakh portfolio reaches ₹1 Crore in approximately 8 to 9 years. Without additional monthly contributions, ₹10 Lakh alone compounding at 12% takes approximately 20.3 years to grow into ₹1 Crore.'
+  },
+  {
+    question: 'How much should I invest monthly to reach ₹1 Crore in 15 years?',
+    answer: 'Assuming a long-term equity annualized return of 12% p.a., you need to invest approximately ₹20,000 per month. If you implement a 10% annual step-up SIP (increasing your investment each year as your income increases), you can start with only ₹12,000 per month and achieve ₹1 Crore in the same timeframe.'
+  },
+  {
+    question: 'What is the difference between CAGR and XIRR?',
+    answer: 'CAGR (Compound Annual Growth Rate) evaluates point-to-point annualized returns between a single initial investment and a final value. XIRR (Extended Internal Rate of Return) calculates annualized return for multiple, irregular cash inflows and outflows on exact specific calendar dates, making it the gold standard for SIPs and mutual funds.'
+  },
+  {
+    question: 'How does inflation affect my future money goal?',
+    answer: 'Inflation erodes purchasing power over time. For example, at an average 6% annual inflation rate, ₹1 Crore today will have the purchasing power of only ₹55.8 Lakh in 10 years, and ₹31.1 Lakh in 20 years. To maintain the exact same lifestyle, your nominal target in 15 years must be approximately ₹2.4 Crore.'
+  },
+  {
+    question: 'Are my calculations and financial inputs stored on any server?',
+    answer: 'No. The Time to Money Calculator is 100% client-side. All mathematical formulas, simulations, and financial inputs run locally inside your browser. No personal financial information or inputs are ever transmitted or stored on any external server.'
+  }
+];
+
+const popularCalculators = [
+  {
+    title: 'Time to Target Calculator',
+    desc: 'Find out the exact years, months, and days to reach any target corpus.',
+    path: `${base}/calculators/time-to-money-calculator/`,
+    badge: 'Flagship'
+  },
+  {
+    title: '₹1 Crore Wealth Calculator',
+    desc: 'Plan your journey to the 8-figure milestone with lump sum & step-up SIP.',
+    path: `${base}/calculators/1-crore-calculator/`,
+    badge: 'Popular'
+  },
+  {
+    title: 'Future Value Calculator',
+    desc: 'Calculate the nominal and inflation-adjusted future worth of your investments.',
+    path: `${base}/calculators/future-value-calculator/`,
+    badge: 'Essential'
+  },
+  {
+    title: 'Required Return Calculator',
+    desc: 'Determine what rate of return is mathematically required to reach your goal.',
+    path: `${base}/calculators/required-return-calculator/`,
+    badge: 'Goal'
+  },
+  {
+    title: 'SIP Return Calculator',
+    desc: 'Model systematic mutual fund investments with annual step-up growth.',
+    path: `${base}/calculators/sip-calculator/`,
+    badge: 'Investing'
+  },
+  {
+    title: 'SWP / Retirement Calculator',
+    desc: 'Calculate portfolio longevity, monthly withdrawal sustainability, and depletion dates.',
+    path: `${base}/calculators/swp-calculator/`,
+    badge: 'Retirement'
+  },
+  {
+    title: 'CAGR Calculator',
+    desc: 'Compute the annualized geometric growth rate for past or future investments.',
+    path: `${base}/calculators/cagr-calculator/`,
+    badge: 'Analysis'
+  },
+  {
+    title: 'Inflation & Real Return',
+    desc: 'Assess future purchasing power and real returns using the Fisher Equation.',
+    path: `${base}/calculators/inflation-calculator/`,
+    badge: 'Macro'
+  }
+];
+---
+
+<BaseLayout
+  title="Time to Money Calculator — Calculate When Your Wealth Goal Becomes Reality"
+  description="Free financial calculator answering when you will reach your target money goal, future investment value, required return, monthly SIP, SWP longevity, and compound interest."
+  faqSchema={faqItems}
+>
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>Free • 100% Client-Side Financial Engineering</span>
+      </div>
+
+      <h1 class="hero-title">
+        Know When Your Money Goal <span class="gradient-text">Becomes Reality.</span>
+      </h1>
+
+      <p class="hero-subtext">
+        This is not merely an interest calculator. Answer the exact questions that matter:
+        How long will it take? How much should you invest monthly? What return is needed? And what happens after inflation?
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#calculator-root" class="btn btn-primary">
+          Calculate Time to Target
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7l7 7-7 7"></path></svg>
+        </a>
+        <a href={`${base}/calculators/`} class="btn btn-secondary">
+          Explore All 17+ Calculators
+        </a>
+      </div>
+
+      <!-- Quick Highlights -->
+      <div class="hero-stats-strip">
+        <div class="stat-item">
+          <span class="stat-bold">17+</span>
+          <span class="stat-caption">Dedicated Calculators</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-bold">Indian & Global</span>
+          <span class="stat-caption">₹ Lakhs/Crores & Millions</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-bold">Zero Storage</span>
+          <span class="stat-caption">Private in Your Browser</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-bold">Inflation-Adjusted</span>
+          <span class="stat-caption">Real Purchasing Power</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLAGSHIP CALCULATOR CONTAINER -->
+  <section class="calc-section">
+    <div class="container">
+      <div class="section-intro">
+        <span class="badge badge-emerald">Interactive Financial Engine</span>
+        <h2>How Long Will It Take to Reach Your Money Goal?</h2>
+        <p>Enter your current savings, target amount, expected annual return, and monthly contributions below.</p>
+      </div>
+
+      <!-- Hydrated Interactive Calculator Component -->
+      <InteractiveCalculator client:load />
+    </div>
+  </section>
+
+  <!-- PRESET GOAL EXAMPLES -->
+  <section class="goals-showcase-section">
+    <div class="container">
+      <div class="section-intro">
+        <span class="badge badge-indigo">Milestone Roadmaps</span>
+        <h2>Explore Realistic Wealth Milestones</h2>
+        <p>Discover typical timelines for landmark financial goals assuming a balanced 12% equity return.</p>
+      </div>
+
+      <div class="goals-grid">
+        <div class="goal-card">
+          <div class="goal-header">
+            <span class="goal-amount">₹10 Lakh</span>
+            <span class="goal-tag">Starter Corpus</span>
+          </div>
+          <p class="goal-desc">Emergency fund or seed investment capital.</p>
+          <ul class="goal-timeline">
+            <li><strong>With ₹15,000/mo:</strong> ~4.2 Years</li>
+            <li><strong>With ₹25,000/mo:</strong> ~2.8 Years</li>
+            <li><strong>From ₹2 Lakh starting:</strong> ~3.1 Years</li>
+          </ul>
+          <a href={`${base}/calculators/investment-goal-calculator/?ta=1000000`} class="goal-link">
+            Plan ₹10 Lakh Goal →
+          </a>
+        </div>
+
+        <div class="goal-card highlight">
+          <div class="goal-header">
+            <span class="goal-amount">₹1 Crore</span>
+            <span class="goal-tag featured">Flagship Goal</span>
+          </div>
+          <p class="goal-desc">The classic 8-figure financial independence milestone.</p>
+          <ul class="goal-timeline">
+            <li><strong>With ₹20,000/mo:</strong> ~15.2 Years</li>
+            <li><strong>With ₹35,000/mo:</strong> ~11.8 Years</li>
+            <li><strong>With 10% Step-Up SIP:</strong> ~12.1 Years</li>
+          </ul>
+          <a href={`${base}/calculators/1-crore-calculator/`} class="goal-link">
+            Open ₹1 Crore Roadmap →
+          </a>
+        </div>
+
+        <div class="goal-card">
+          <div class="goal-header">
+            <span class="goal-amount">₹2 Crore</span>
+            <span class="goal-tag">Retirement Ready</span>
+          </div>
+          <p class="goal-desc">Sustainable retirement corpus yielding ~₹80k/mo via SWP.</p>
+          <ul class="goal-timeline">
+            <li><strong>With ₹30,000/mo:</strong> ~16.8 Years</li>
+            <li><strong>With ₹50,000/mo:</strong> ~13.5 Years</li>
+            <li><strong>From ₹25 Lakh starting:</strong> ~11.2 Years</li>
+          </ul>
+          <a href={`${base}/calculators/crore-calculator/?ta=20000000`} class="goal-link">
+            Plan ₹2 Crore Goal →
+          </a>
+        </div>
+
+        <div class="goal-card">
+          <div class="goal-header">
+            <span class="goal-amount">₹5 Crore</span>
+            <span class="goal-tag">Generational Wealth</span>
+          </div>
+          <p class="goal-desc">Complete financial freedom and legacy building.</p>
+          <ul class="goal-timeline">
+            <li><strong>With ₹50,000/mo:</strong> ~20.5 Years</li>
+            <li><strong>With ₹1,00,000/mo:</strong> ~15.8 Years</li>
+            <li><strong>From ₹50 Lakh starting:</strong> ~16.2 Years</li>
+          </ul>
+          <a href={`${base}/calculators/crore-calculator/?ta=50000000`} class="goal-link">
+            Plan ₹5 Crore Goal →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR CALCULATORS DIRECTORY PREVIEW -->
+  <section class="tools-directory-section">
+    <div class="container">
+      <div class="section-intro">
+        <span class="badge badge-emerald">Suite of Tools</span>
+        <h2>Comprehensive Financial Engineering Suite</h2>
+        <p>Purpose-built specialized calculators for every stage of your wealth creation journey.</p>
+      </div>
+
+      <div class="tools-grid">
+        {popularCalculators.map(calc => (
+          <a href={calc.path} class="tool-card">
+            <div class="tool-top">
+              <span class="tool-badge">{calc.badge}</span>
+              <span class="tool-arrow">→</span>
+            </div>
+            <h3 class="tool-title">{calc.title}</h3>
+            <p class="tool-desc">{calc.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="center-btn-wrap">
+        <a href={`${base}/calculators/`} class="btn btn-secondary">
+          View Complete Catalog of 17+ Calculators
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS & METHODOLOGY -->
+  <section class="methodology-section">
+    <div class="container">
+      <div class="methodology-grid">
+        <div class="method-text">
+          <span class="badge badge-indigo">Scientific Rigor</span>
+          <h2>How Time to Money Calculates Your Future</h2>
+          <p>
+            Unlike naive compounding calculators that assume flat annual snapshots, the Time to Money calculation engine employs month-by-month periodic numerical simulations.
+          </p>
+          <div class="method-points">
+            <div class="point-item">
+              <div class="point-num">1</div>
+              <div>
+                <h4>True Periodic Compounding</h4>
+                <p>Accurately models daily, monthly, or quarterly compounding frequencies without approximation drift.</p>
+              </div>
+            </div>
+            <div class="point-item">
+              <div class="point-num">2</div>
+              <div>
+                <h4>Annual Step-Up Growth</h4>
+                <p>Simulates real-world income progression where your SIP contribution increases each year (e.g. 10% annual hike).</p>
+              </div>
+            </div>
+            <div class="point-item">
+              <div class="point-num">3</div>
+              <div>
+                <h4>Inflation & Purchasing Power</h4>
+                <p>Calculates both nominal wealth and real purchasing power using the Fisher Equation to prevent future money illusions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="method-card">
+          <h3>Central Formula Overview</h3>
+          <div class="formula-block">
+            <span class="formula-label">Future Value with Recurring Stream:</span>
+            <code>FV = P(1 + r/n)^(nt) + PMT [ ((1 + r/n)^(nt) - 1) / (r/n) ]</code>
+          </div>
+          <div class="formula-block">
+            <span class="formula-label">Fisher Real Rate of Return:</span>
+            <code>Real Return = [ (1 + Nominal Rate) / (1 + Inflation Rate) ] - 1</code>
+          </div>
+          <div class="formula-block">
+            <span class="formula-label">Time Value of Money (Continuous Form):</span>
+            <code>t = ln(Target / Initial) / r</code>
+          </div>
+          <p class="formula-footer">
+            All calculations are executed deterministically on your machine using strict IEEE 754 precision safeguards.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREQUENTLY ASKED QUESTIONS (SEO FAQ) -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-intro">
+        <span class="badge badge-amber">Frequently Asked Questions</span>
+        <h2>Everything You Need to Know About Time to Money</h2>
+        <p>Mathematical principles, investing timelines, and calculation mechanics explained.</p>
+      </div>
+
+      <div class="faq-accordion-list">
+        {faqItems.map((item, idx) => (
+          <details class="faq-accordion-item" open={idx === 0}>
+            <summary class="faq-question">
+              <span>{item.question}</span>
+              <span class="faq-icon">+</span>
+            </summary>
+            <div class="faq-answer">
+              <p>{item.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT CHIRAG SINGHAL SECTION -->
+  <section class="about-creator-section">
+    <div class="container creator-box">
+      <div class="creator-content">
+        <span class="badge badge-emerald">Behind the Calculator</span>
+        <h2>Created by Chirag Singhal</h2>
+        <p class="creator-intro">
+          Hi, I am <strong>Chirag Singhal</strong>, a Software Engineer from India. I built the <strong>Time to Money Calculator</strong> to provide everyday investors, financial planners, and students with a free, uncompromising, and mathematically rigorous financial calculator that respects user privacy and answers human questions.
+        </p>
+        <p class="creator-details">
+          All calculations stay 100% inside your browser — no tracking, no backend database, and no financial data harvesting.
+        </p>
+
+        <div class="creator-actions">
+          <a href="https://github.com/chirag127/time-to-money-calculator" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            Star on GitHub
+          </a>
+          <a href="https://buymeacoffee.com/chirag127" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            ☕ Buy Me a Coffee
+          </a>
+          <a href={`${base}/about/`} class="btn btn-outline">
+            Full Bio & Connect
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* HERO SECTION */
+  .hero-section {
+    padding: 4.5rem 0 3rem;
+    position: relative;
+    text-align: center;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 880px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-medium);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    box-shadow: 0 0 8px var(--accent-primary);
+  }
+
+  .hero-title {
+    margin-bottom: 1.25rem;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #10b981 0%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtext {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 720px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+
+  .hero-stats-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.75rem;
+    padding: 1rem 1.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-bold {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+
+  .stat-caption {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 30px;
+    background: var(--border-subtle);
+  }
+
+  @media (max-width: 680px) {
+    .stat-divider {
+      display: none;
+    }
+    .hero-stats-strip {
+      gap: 1rem;
+    }
+  }
+
+  /* SECTION INTRO */
+  .section-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .section-intro h2 {
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  .section-intro p {
+    font-size: 1rem;
+  }
+
+  /* GOALS SHOWCASE */
+  .goals-showcase-section {
+    padding: 4rem 0;
+    background: var(--bg-tertiary);
+  }
+
+  .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .goal-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .goal-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-primary);
+  }
+
+  .goal-card.highlight {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .goal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .goal-amount {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .goal-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+  }
+
+  .goal-tag.featured {
+    background: var(--accent-primary-light);
+    color: var(--accent-primary);
+  }
+
+  .goal-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .goal-timeline {
+    list-style: none;
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+  }
+
+  .goal-link {
+    margin-top: auto;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    transition: color 0.15s ease;
+  }
+
+  .goal-link:hover {
+    text-decoration: underline;
+  }
+
+  /* TOOLS DIRECTORY */
+  .tools-directory-section {
+    padding: 4.5rem 0;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .tool-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tool-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .tool-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .tool-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    background: var(--accent-primary-light);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+  }
+
+  .tool-arrow {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    transition: transform 0.15s ease;
+  }
+
+  .tool-card:hover .tool-arrow {
+    transform: translateX(4px);
+    color: var(--accent-primary);
+  }
+
+  .tool-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .tool-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .center-btn-wrap {
+    text-align: center;
+  }
+
+  /* METHODOLOGY SECTION */
+  .methodology-section {
+    padding: 4.5rem 0;
+    background: var(--bg-tertiary);
+  }
+
+  .methodology-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .methodology-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .method-text h2 {
+    margin: 0.75rem 0 1rem;
+  }
+
+  .method-text p {
+    margin-bottom: 1.5rem;
+  }
+
+  .method-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .point-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .point-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .point-item h4 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .point-item p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  .method-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .method-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .formula-block {
+    margin-bottom: 1.25rem;
+  }
+
+  .formula-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+
+  .formula-block code {
+    display: block;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-subtle);
+    padding: 0.6rem 0.85rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent-primary);
+    overflow-x: auto;
+  }
+
+  .formula-footer {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 1rem;
+  }
+
+  /* FAQ SECTION */
+  .faq-section {
+    padding: 4.5rem 0;
+  }
+
+  .faq-accordion-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-accordion-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-icon {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--accent-primary);
+  }
+
+  .faq-accordion-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 1.25rem 1.25rem;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ABOUT CREATOR SECTION */
+  .about-creator-section {
+    padding: 4.5rem 0;
+    background: var(--bg-tertiary);
+  }
+
+  .creator-box {
+    max-width: 820px;
+  }
+
+  .creator-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  .creator-content h2 {
+    margin: 0.75rem 0 1rem;
+  }
+
+  .creator-intro {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .creator-details {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+  }
+
+  .creator-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+</style>

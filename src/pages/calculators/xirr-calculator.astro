@@ -1,0 +1,59 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'XIRR on Irregular SIP Purchases and Final Redemption',
+  description: 'An investor invested ₹50,000 on Jan 1 2023, ₹30,000 on Jul 1 2023, ₹40,000 on Mar 1 2024, and the portfolio is worth ₹1,50,000 on Jan 1 2025.',
+  steps: [
+    { label: 'Outflow 1 (Jan 2023)', value: '-₹50,000' },
+    { label: 'Outflow 2 (Jul 2023)', value: '-₹30,000' },
+    { label: 'Outflow 3 (Mar 2024)', value: '-₹40,000' },
+    { label: 'Current Value (Jan 2025)', value: '+₹1,50,000' },
+    { label: 'Net Inflow / Profit', value: '₹30,000' }
+  ],
+  result: 'XIRR: ~16.8% annualized rate of return across the exact calendar dates'
+};
+
+const faqItems = [
+  {
+    question: 'What is XIRR and when should I use it?',
+    answer: 'XIRR stands for Extended Internal Rate of Return. Use XIRR whenever cash transactions occur at multiple different dates or irregular intervals, such as mutual fund SIPs, dividend reinvestments, and periodic withdrawals.'
+  },
+  {
+    question: 'How is XIRR calculated mathematically?',
+    answer: 'XIRR uses numerical methods (such as the Newton-Raphson algorithm) to find the internal discount rate r that makes the Net Present Value (NPV) of all cash inflows and outflows equal to exactly zero.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'CAGR Calculator', desc: 'Compute single lump sum point-to-point annualized return.', path: `${base}/calculators/cagr-calculator/` },
+  { title: 'SIP Calculator', desc: 'Simulate regular monthly SIP investments.', path: `${base}/calculators/sip-calculator/` },
+  { title: 'Time to Target Calculator', desc: 'Calculate timeline to reach your money goal.', path: `${base}/calculators/time-to-money-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="XIRR Calculator — Extended Internal Rate of Return for SIPs"
+  description="Calculate XIRR (Extended Internal Rate of Return) for mutual fund SIPs, stocks, and irregular cashflows with exact transaction dates."
+  badge="Advanced Performance"
+  headline="XIRR Calculator"
+  subheadline="Accurately evaluate annualized internal rate of return for multiple irregular cash inflows and distributions."
+  initialMode="return"
+  initialCurrent={120000}
+  initialTarget={150000}
+  initialYears={2}
+  initialMonthly={0}
+  formulaTitle="XIRR Equation"
+  formulaCode="0 = Σ [ C_i / (1 + r)^((d_i - d_0) / 365) ]"
+  formulaExplanation="<p>Where C_i is the cash flow amount at date d_i (negative for outflows/investments, positive for inflows/current value), d_0 is the first investment date, and r is the annualized XIRR discount rate that drives the summation to zero.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'XIRR Calculator', url: '/calculators/xirr-calculator/' }
+  ]}
+/>

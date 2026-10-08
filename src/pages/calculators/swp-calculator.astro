@@ -1,0 +1,64 @@
+---
+import CalculatorPageShell from '../../components/CalculatorPageShell.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const workedExample = {
+  title: 'Retirement Corpus of ₹1 Crore with ₹50,000/Month SWP at 8% Return',
+  description: 'A retiree withdrawals ₹50,000 monthly from a ₹1 Crore corpus invested in conservative hybrid assets earning 8% p.a.',
+  steps: [
+    { label: 'Initial Corpus', value: '₹1,00,00,000' },
+    { label: 'Monthly Withdrawal', value: '₹50,000 / month' },
+    { label: 'Annual Portfolio Return', value: '8% p.a.' },
+    { label: 'Annual Withdrawal Total', value: '₹6,00,000 (6% initial withdrawal rate)' },
+    { label: 'Portfolio Longevity', value: '25+ Years Sustainable' },
+    { label: 'Total Withdrawn Over 20 Yrs', value: '₹1,20,00,000 (1.2 Crore received)' }
+  ],
+  result: 'Corpus remains fully solvent and sustainable across retirement!'
+};
+
+const faqItems = [
+  {
+    question: 'What is an SWP (Systematic Withdrawal Plan)?',
+    answer: 'An SWP allows an investor to regularly withdraw a fixed sum of money from their mutual fund corpus at predetermined intervals (usually monthly) while the remaining balance continues to earn compound returns.'
+  },
+  {
+    question: 'What is a safe withdrawal rate for an SWP?',
+    answer: 'A withdrawal rate of 4% to 6% of the initial corpus per year is generally considered sustainable if the portfolio generates conservative returns between 8% and 10% p.a.'
+  },
+  {
+    question: 'What happens if withdrawal rate exceeds investment return?',
+    answer: 'If the monthly withdrawal exceeds the portfolio growth, capital depletion begins. The calculator provides an exact depletion timeline warning indicating when the corpus will reach zero.'
+  }
+];
+
+const relatedCalculators = [
+  { title: 'Retirement Corpus Planner', desc: 'Calculate the total corpus needed for retirement.', path: `${base}/calculators/retirement-calculator/` },
+  { title: 'Time to Target Calculator', desc: 'Calculate years to build your SWP corpus.', path: `${base}/calculators/time-to-money-calculator/` },
+  { title: '1 Crore Calculator', desc: 'Plan your route to ₹1 Crore.', path: `${base}/calculators/1-crore-calculator/` }
+];
+---
+
+<CalculatorPageShell
+  title="SWP Calculator — Systematic Withdrawal Plan & Portfolio Longevity"
+  description="Calculate monthly SWP withdrawals from your investment corpus. Assess portfolio longevity, depletion dates, and retirement cashflow sustainability."
+  badge="Retirement & Cash Flow"
+  headline="SWP / Withdrawal Calculator"
+  subheadline="Model systematic monthly retirement withdrawals. Discover how long your corpus lasts and ensure your wealth never runs out."
+  initialMode="swp"
+  initialCurrent={10000000}
+  initialReturn={8}
+  initialMonthly={50000}
+  initialYears={25}
+  formulaTitle="SWP Balance Recursion Formula"
+  formulaCode="Balance(m) = Balance(m-1) × (1 + r/12) - Withdrawal(m)"
+  formulaExplanation="<p>Where monthly balance is updated with investment return for the month and reduced by the periodic withdrawal. If withdrawal increases annually with inflation, withdrawal is escalated: W(y) = W_0 × (1 + i)^y.</p>"
+  workedExample={workedExample}
+  faqItems={faqItems}
+  relatedCalculators={relatedCalculators}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Calculators', url: '/calculators/' },
+    { name: 'SWP Calculator', url: '/calculators/swp-calculator/' }
+  ]}
+/>
